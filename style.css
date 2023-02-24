@@ -2387,3 +2387,22 @@ ul.links li a:hover {
 }
 
 /*-- //responsive media queries --*/
+
+/* CSS Changes from here onwards */
+.menu-item a {
+    color: #828284;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin: 0em 0.5em;
+    padding: 10px 25px;
+    text-transform: uppercase;
+}
+
+.menu-item {
+    color: #828284;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin: 0em 0.5em;
+    padding: 10px 25px;
+    text-transform: uppercase;
+}

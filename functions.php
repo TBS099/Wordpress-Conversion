@@ -1,6 +1,7 @@
 <?php
 
 //adding fonts, javascript and stylsheets
+add_action('wp_enqueue_scripts', 'load_stylesheets');
 function load_stylesheets()
 {
 
@@ -32,10 +33,18 @@ function load_stylesheets()
     wp_enqueue_style('googlefont2', "https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800", array(), '1.0', 'all');
 
 }
-add_action('wp_enqueue_scripts', 'load_stylesheets');
 
 //Adding WooCommerce Support
 add_action( 'after_setup_theme', 'woocommerce_support' );
 function woocommerce_support() {
    add_theme_support( 'woocommerce' );
-}   
+}  
+
+//Registering the Menus
+register_nav_menus(
+    array(
+        'top-menu' => __('Top Menu', 'theme'),
+        'footer-menu' => __('Footer Menu', 'theme'),
+    )
+
+);

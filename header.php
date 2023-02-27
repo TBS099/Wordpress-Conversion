@@ -111,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- open/close -->
 			</div>
 			<label class="top-log mx-auto"></label>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light top-header mb-2">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light top-header">
 
 				<button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 				    aria-expanded="false" aria-label="Toggle navigation">

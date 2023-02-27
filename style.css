@@ -2391,18 +2391,85 @@ ul.links li a:hover {
 /* CSS Changes from here onwards */
 .menu-item a {
     color: #828284;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 2px;
     margin: 0em 0.5em;
     padding: 10px 25px;
     text-transform: uppercase;
+    text-align: center;
+
 }
 
-.menu-item {
-    color: #828284;
-    font-size: 16px;
-    letter-spacing: 2px;
-    margin: 0em 0.5em;
-    padding: 10px 25px;
-    text-transform: uppercase;
+.menu-item a:hover {
+    color:#ff4e00;
+}
+
+.mega-menu-title {
+    pointer-events: none;
+    cursor: default;
+    list-style-type: none;   
+}
+
+.mega-menu-title a {
+color:black;
+font-size: 23px;
+}
+
+li.menu-item .sub-menu:first-of-type {
+    position: absolute;
+    display:flex;
+    top: 38px;
+    z-index: 100;
+    left:0px;
+    right:0px;
+    background-color: #ffffff;
+    animation: smooth-transition 1s;
+}
+
+li.menu-item .sub-menu li{
+    flex: 0 0 33.33%;
+    width:33.33%;
+}
+
+.navbar-collapse ul ul {
+    display:none !important;
+    z-index: 99999;
+    width: 180px;
+}
+
+@keyframes smooth-transition {
+    from{top:0;}
+    to{top:38px;}
+}
+
+.navbar-collapse ul li:hover ul{
+margin-top: 5px;
+display:flex !important;
+width: 100%; 
+}
+
+li.menu-item .sub-menu li .sub-menu{
+    position: static;
+    list-style: none;
+    display:block !important;
+    pointer-events: all;
+    cursor:auto;
+}
+
+li.menu-item .sub-menu li .sub-menu a{
+    font-size:15px;
+    color:#828284;
+}
+
+li.menu-item .sub-menu li .sub-menu a:hover{
+    color:#ff4e00;
+}
+
+@media(max-width:991px){
+    li.has-mega-menu .sub-menu {
+        position: relative;
+        float:none;
+        left:20px;
+        top:-10px;
+    }
 }

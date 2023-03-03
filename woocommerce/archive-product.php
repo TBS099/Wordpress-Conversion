@@ -169,21 +169,14 @@
 									alt="">
 								<h6>50% off</h6>
 							</div>
-							<?php global $post;
-								$post->ID;
-								$currPostID=get_the_ID();
-								echo get_the_ID();
-								echo $currPostID;?>
+								
 							<div class="row">
 								<!-- /Products Display -->
 								<?php
 								global $post;
 								$post->ID;
-								$currPostID=get_the_ID();
-								echo $currPostID;
-								$page_id = get_queried_object_id();
-								echo $page_id;
-								$args = array('post-type' => 'product', 'posts_per_page' => '20');
+								$currPostID = get_option( 'woocommerce_shop_page_id' );
+								$args = array('post_type' => 'product', 'posts_per_page' => '20');
 								$the_query = new WP_Query($args);
 								if ($the_query->have_posts()):
 									while ($the_query->have_posts()):
@@ -193,7 +186,7 @@
 													<div class="product-googles-info googles">
 														<div class="men-pro-item">
 															<div class="men-thumb-item">
-																<img src="'.wp_get_attachment_image_url(get_post_meta(get_the_ID(), '_thumbnail_id', true));'" class="img-fluid" alt="">
+																<img src="'.get_the_post_thumbnail_url($post->ID,'medium').'" class="img-fluid" alt="">
 																<div class="men-cart-pro">
 																	<div class="inner-men-cart-pro">
 																		<a href="single.html" class="link-product-add-cart">Quick
@@ -206,39 +199,16 @@
 																<div class="info-product-price">
 																	<div class="grid_meta">
 																		<div class="product_price">
-																			<h4>
-																				<a href="single.html">Farenheit (Grey)</a>
+																			<h4 class="product-title">
+																				<a href="single.html">'.get_the_title().'</a>
 																			</h4>
 																			<div class="grid-price mt-2">
-																				<span class="money ">$575.00</span>
+																			<span class="money ">'.get_woocommerce_currency_symbol().'</span>
+																				<span class="money ">'.get_post_meta(get_the_ID(), '_regular_price', true).'</span>
 																			</div>
 																		</div>
 																		<ul class="stars">
-																			<li>
-																				<a href="#">
-																					<i class="fa fa-star" aria-hidden="true"></i>
-																				</a>
-																			</li>
-																			<li>
-																				<a href="#">
-																					<i class="fa fa-star" aria-hidden="true"></i>
-																				</a>
-																			</li>
-																			<li>
-																				<a href="#">
-																					<i class="fa fa-star" aria-hidden="true"></i>
-																				</a>
-																			</li>
-																			<li>
-																				<a href="#">
-																					<i class="fa fa-star" aria-hidden="true"></i>
-																				</a>
-																			</li>
-																			<li>
-																				<a href="#">
-																					<i class="fa fa-star-half-o" aria-hidden="true"></i>
-																				</a>
-																			</li>
+																		'. do_shortcode( "[product_rating id=".get_the_id()."]" ).'
 																		</ul>
 																	</div>
 																	<div class="googles single-item hvr-outline-out">
@@ -284,5 +254,4 @@
 		</div>
 	</div>
 </section>
-
-<?php get_footer(); ?>
+<?php get_footer();?>

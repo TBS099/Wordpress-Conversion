@@ -1663,3 +1663,15 @@ span.item_price {
 }
 
 /*-- //Responsive --*/
+/* changes start from here */
+.men-thumb-item {
+	height: 300px;;
+}
+
+.product-googles-info {
+	height:450px;
+}
+
+.product-title {
+	margin-top:10px;
+}

@@ -138,6 +138,7 @@ button.top_googles_cart {
     cursor: pointer;
     border: 1px solid #dde2e6;
     padding: 0.5em 1em;
+	max-width:135px;
 }
 
 /*-- cart-css --*/
@@ -1476,6 +1477,8 @@ span.item_price {
     button.top_googles_cart {
         padding: 0.5em 0.5em;
         letter-spacing: 1px;
+		max-width:130px;
+		margin-top:10px;
     }
 }
 

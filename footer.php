@@ -178,7 +178,7 @@
 		open = false;
 	});
 </script>
-<!-- carousel -->
+
 <!-- Count-down -->
 <script>
 	var d = new Date();
@@ -189,6 +189,8 @@
 	});
 </script>
 <!--// Count-down -->
+
+<!-- carousel -->
 <script>
 	jQuery(document).ready(function ($) {
 		$('.owl-carousel').owlCarousel({
@@ -218,8 +220,8 @@
 		})
 	})
 </script>
+<!-- end carousel -->
 
-<!-- //end-smooth-scrolling -->
 <!-- Horizontal tab for single product page -->
 <script>
 	jQuery(document).ready(function () {
@@ -244,6 +246,20 @@
 	});
 </script>
 <!-- end of horizontal tab -->
+
+<!-- FlexSlider -->
+<script src="js/jquery.flexslider.js"></script>
+<script>
+	// Can also be used with $(document).ready()
+	jQuery(window).load(function () {
+		jQuery('.flexslider1').flexslider({
+			animation: "slide",
+			controlNav: "thumbnails"
+		});
+	});
+</script>
+<!-- //FlexSlider-->
+
 <!-- dropdown nav -->
 <script>
 	jQuery(document).ready(function () {
@@ -260,6 +276,7 @@
 	});
 </script>
 <!-- //dropdown nav -->
+
 <script>
 	jQuery(document).ready(function (jQuery) {
 		jQuery(".scroll").click(function (event) {

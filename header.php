@@ -1,8 +1,7 @@
-
 <html lang="zxx">
 
 <head>
-    <?php wp_head()?>
+	<?php wp_head() ?>
 	<title>Goggles Ecommerce Category Bootstrap responsive Web Template | Home :: w3layouts</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
@@ -17,6 +16,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.scrollTo(0, 1);
 		}
 	</script>
+	<script>
+		function addToCart() {
+			var quantity = document.getElementById("quantity").value;
+			var add_to_cart_url = '<?= do_shortcode("[add_to_cart_url id='" . get_the_ID() . "' quantity='']"); ?>';
+			add_to_cart_url = add_to_cart_url.replace('quantity=""', 'quantity="' + quantity + '"');
+			window.location.href = add_to_cart_url;
+		}
+	</script>
 </head>
 
 <body>
@@ -28,7 +35,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<h6>Need Help</h6>
 					<ul>
 						<li>
-							<i class="fas fa-phone"></i> Call</li>
+							<i class="fas fa-phone"></i> Call
+						</li>
 						<li class="number-phone mt-3">12345678099</li>
 					</ul>
 				</div>
@@ -47,13 +55,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</a>
 						</li>
 						<li class="galssescart galssescart2 cart cart box_1">
-							<form action="#" method="post" class="last">
-								<input type="hidden" name="cmd" value="_cart">
-								<input type="hidden" name="display" value="1">
-								<button class="top_googles_cart" type="submit" name="submit" value="">
-									My Cart
-									<i class="fas fa-cart-arrow-down"></i>
-								</button>
+							<?php
+							global $woocommerce;
+							$cart_url = $woocommerce->cart->get_cart_url();
+							$cart_contents_count = $woocommerce->cart->cart_contents_count;
+							$cart_total = $woocommerce->cart->get_cart_total();
+							?>
+
+							<button href="<?php echo $cart_url; ?>" class="top_googles_cart cart-contents">
+								<i class="fa fa-shopping-cart"></i><br>
+								<?php echo $cart_contents_count . ' items - ' . $cart_total; ?>
+							</button>
 							</form>
 						</li>
 					</ul>
@@ -68,12 +80,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<form action="#" method="post">
 									<div class="form-group">
 										<label class="mb-2">Email address</label>
-										<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
-										<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+										<input type="email" class="form-control" id="exampleInputEmail1"
+											aria-describedby="emailHelp" placeholder="" required="">
+										<small id="emailHelp" class="form-text text-muted">We'll never share your email
+											with anyone else.</small>
 									</div>
 									<div class="form-group">
 										<label class="mb-2">Password</label>
-										<input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required="">
+										<input type="password" class="form-control" id="exampleInputPassword1"
+											placeholder="" required="">
 									</div>
 									<div class="form-check mb-2">
 										<input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -113,22 +128,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<label class="top-log mx-auto"></label>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light top-header">
 
-				<button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-				    aria-expanded="false" aria-label="Toggle navigation">
+				<button class="navbar-toggler mx-auto" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
-						
+
 					</span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<?php wp_nav_menu(
-                    array(
-                        'menu' => 'Primary Menu',//name of the menu in the array created in functions.php
-						'menu_class'=>'navbar-nav nav-mega mx-auto',
-                        'container' => '',
-                        'theme_location' => 'top-menu', //selected in wp admin 
-
-                    )
-                ) ?>
+					<?php wp_nav_menu(
+						array(
+							'menu' => 'Primary Menu',
+							//name of the menu in the array created in functions.php
+							'menu_class' => 'navbar-nav nav-mega mx-auto',
+							'container' => '',
+							'theme_location' => 'top-menu',
+							//selected in wp admin 
+					
+						)
+					) ?>
 				</div>
 			</nav>
 		</header>

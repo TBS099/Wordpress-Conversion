@@ -1678,3 +1678,22 @@ span.item_price {
 .product-title {
 	margin-top:10px;
 }
+
+.star{
+	display:contents;
+}
+span label .fa-star:hover{
+	color:orange;
+}
+.review{
+	margin-top:5px;
+}
+.commentlist{
+	list-style: none;
+}
+.half{
+	width:50%;
+	display:flex;
+	flex-direction: column;
+	margin-top: 10px;
+}

@@ -264,3 +264,22 @@ h2.resp-accordion:first-child {
     border-right: 5px solid transparent;
   }
 }
+
+/* changes start here */
+.resp-tab-item{
+  width:auto !important;
+}
+
+@media(min-width:990px){
+.resp-tabs-container{
+  width: 940px;
+  height:auto;
+}
+}
+
+@media(min-width:1150px){
+  .resp-tabs-container{
+    width: 1100px;
+    height:auto;
+  }
+  }

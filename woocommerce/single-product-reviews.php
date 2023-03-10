@@ -102,14 +102,14 @@ if ( ! comments_open() ) {
 				$comment_form['fields'] = array();
 
 				foreach ( $fields as $key => $field ) {
-					$field_html  = '<p class="comment-form-' . esc_attr( $key ) . '">';
-					$field_html .= '<label for="' . esc_attr( $key ) . '">' . esc_html( $field['label'] );
+					$field_html  = '<div class="half"<p class="comment-form-' . esc_attr( $key ) . '">';
+					$field_html .= '<label for="' . esc_attr( $key ) . ' class="'.esc_attr($key).'">' . esc_html( $field['label'] );
 
 					if ( $field['required'] ) {
 						$field_html .= '&nbsp;<span class="required">*</span>';
 					}
 
-					$field_html .= '</label><input id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" type="' . esc_attr( $field['type'] ) . '" value="' . esc_attr( $field['value'] ) . '" size="30" ' . ( $field['required'] ? 'required' : '' ) . ' /></p>';
+					$field_html .= '</label><input id="' . esc_attr( $key ) . '" name="' . esc_attr( $key ) . '" type="' . esc_attr( $field['type'] ) . '" value="' . esc_attr( $field['value'] ) . '" size="30" ' . ( $field['required'] ? 'required' : '' ) . ' /></p></div>';
 
 					$comment_form['fields'][ $key ] = $field_html;
 				}
@@ -121,15 +121,15 @@ if ( ! comments_open() ) {
 				}
 
 				if ( wc_review_ratings_enabled() ) {
-					$comment_form['comment_field'] = '<div class="comment-form-rating"><label for="rating">' . esc_html__( 'Your rating', 'woocommerce' ) . ( wc_review_ratings_required() ? '&nbsp;<span class="required">*</span>' : '' ) . '</label><select name="rating" id="rating" required>
-						<option value="">' . esc_html__( 'Rate&hellip;', 'woocommerce' ) . '</option>
-						<option value="5">' . esc_html__( 'Perfect', 'woocommerce' ) . '</option>
-						<option value="4">' . esc_html__( 'Good', 'woocommerce' ) . '</option>
-						<option value="3">' . esc_html__( 'Average', 'woocommerce' ) . '</option>
-						<option value="2">' . esc_html__( 'Not that bad', 'woocommerce' ) . '</option>
-						<option value="1">' . esc_html__( 'Very poor', 'woocommerce' ) . '</option>
-					</select></div>';
+					$comment_form['comment_field'] = '<div class="comment-form-rating"><label for="rating">' . esc_html__( 'Your rating', 'woocommerce' ) . ( wc_review_ratings_required() ? '&nbsp;<span class="required">*</span>' : '' ) . '</label><div class="star-rating"><span class="star-rating-label">' . esc_html__( 'Click to rate:', 'woocommerce' ) . '</span><span class="star-rating-input">
+					<input type="radio" name="rating" value="1" id="1-star" class="star" required><label id="star" for="1-star"><i class="fa fa-star"></i></label>
+					<input type="radio" name="rating" value="2" id="2-stars" class="star" required><label id="star" for="2-stars"><i class="fa fa-star"></i></label>
+					<input type="radio" name="rating" value="3" id="3-stars" class="star" required><label id="star" for="3-stars"><i class="fa fa-star"></i></label>
+					<input type="radio" name="rating" value="4" id="4-stars" class="star" required><label id="star" for="4-stars"><i class="fa fa-star"></i></label>
+					<input type="radio" name="rating" value="5" id="5-stars" class="star" required><label id="star" for="5-stars"><i class="fa fa-star"></i></label>
+					</span></div></div>';
 				}
+				
 
 				$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . esc_html__( 'Your review', 'woocommerce' ) . '&nbsp;<span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" required></textarea></p>';
 

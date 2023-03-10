@@ -166,7 +166,7 @@
 										</div>
 										<div class="add-review">
 											<h4>add a review</h4>
-										    <?php display_woocommerce_review_form(); ?>
+										    <?php  comments_template('./wordpress-conversion/woocommerce/single-product-reviews.php'); ?>
 										</div>
 									</div>
 

@@ -143,3 +143,20 @@ if ( ! comments_open() ) {
 
 	<div class="clear"></div>
 </div>
+
+<!-- review hide and show custom js -->
+<script>
+	// Hide Star Rating after pressing reply
+	jQuery('.comment-reply-link').on('click', function(){
+	jQuery('.comment-form-rating').css('display', 'none');
+	$(".star").removeAttr("required");
+	});
+	
+
+	//Show Star Rating after pressing reply
+	jQuery('#cancel-comment-reply-link').on('click', function(){
+	jQuery('.comment-form-rating').css('display', '');
+	$(".star").attr("required","required");
+	});
+	
+</script>

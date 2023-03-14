@@ -189,7 +189,7 @@
 																<img src="'.get_the_post_thumbnail_url($post->ID,'medium').'" class="img-fluid" alt="">
 																<div class="men-cart-pro">
 																	<div class="inner-men-cart-pro">
-																		<a href="single.html" class="link-product-add-cart">Quick
+																		<a href="'.get_permalink(get_the_ID()).'" class="link-product-add-cart">Quick
 																			View</a>
 																	</div>
 																</div>
@@ -200,7 +200,7 @@
 																	<div class="grid_meta">
 																		<div class="product_price">
 																			<h4 class="product-title">
-																				<a href="single.html">'.get_the_title().'</a>
+																				<a href="'.get_permalink(get_the_ID()).'">'.get_the_title().'</a>
 																			</h4>
 																			<div class="grid-price mt-2">
 																			<span class="money ">'.get_woocommerce_currency_symbol().'</span>
@@ -212,15 +212,9 @@
 																		</ul>
 																	</div>
 																	<div class="googles single-item hvr-outline-out">
-																		<form action="#" method="post">
-																			<input type="hidden" name="cmd" value="_cart">
-																			<input type="hidden" name="add" value="1">
-																			<input type="hidden" name="googles_item" value="Farenheit">
-																			<input type="hidden" name="amount" value="575.00">
-																			<button type="submit" class="googles-cart pgoogles-cart">
+																			<button onclick="addToCart()" class="googles-cart pgoogles-cart">
 																				<i class="fas fa-cart-plus"></i>
 																			</button>
-																		</form>
 
 																	</div>
 																</div>

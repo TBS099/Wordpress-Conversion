@@ -51,7 +51,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			 */
 			do_action( 'woocommerce_review_meta', $comment );
 
-			do_action( 'woocommerce_review_before_comment_text', $comment );
+			$args = array(
+				'reply_text' => 'Reply <span>&darr;</span>',
+				'depth'      => '1',
+				'max_depth'  => '5'
+			);
+			comment_reply_link( $args ); 
+			
+			// do_action( 'woocommerce_review_before_comment_text', $comment );
 
 			/**
 			 * The woocommerce_review_comment_text hook

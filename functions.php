@@ -128,3 +128,9 @@ function display_product_gallery($id)
 }
 add_shortcode('product_gallery', 'display_product_gallery');
 
+
+add_action('wp_enqueue_scripts', 'theme_print_scripts');
+
+function theme_print_scripts(){
+if( is_singular() ) wp_enqueue_script('comment-reply');
+}

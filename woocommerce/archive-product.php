@@ -203,20 +203,51 @@
 																				<a href="'.get_permalink(get_the_ID()).'">'.get_the_title().'</a>
 																			</h4>
 																			<div class="grid-price mt-2">
-																			<span class="money ">'.get_woocommerce_currency_symbol().'</span>
-																				<span class="money ">'.get_post_meta(get_the_ID(), '_regular_price', true).'</span>
+																			<span class="money ">';
+																			if (!empty(get_post_meta($id, '_sale_price', true))) { ?>
+																				<?php echo get_woocommerce_currency_symbol() . get_post_meta($id, '_sale_price', true); ?>
+																				<br>
+																				<del>
+																					<?php echo get_woocommerce_currency_symbol() . get_post_meta($id, '_regular_price', true); ?>
+																				</del>
+																				<?php
+																			} else { ?>
+													
+																				<?php echo get_woocommerce_currency_symbol() . get_post_meta($id, '_price', true); ?>
+																				<br>
+																			<?php }
+																			;
+																			echo '</span>
+																			
 																			</div>
 																		</div>
 																		<ul class="stars">
 																		'. do_shortcode( "[product_rating id=".get_the_id()."]" ).'
 																		</ul>
 																	</div>
-																	<div class="googles single-item hvr-outline-out">
-																			<button onclick="addToCart()" class="googles-cart pgoogles-cart">
-																				<i class="fas fa-cart-plus"></i>
-																			</button>
+																	<div class="googles single-item hvr-outline-out">';
+																	if ( $product->is_in_stock() ) : ?>
 
-																	</div>
+																		<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+																	
+																		<form class="cart" action="#" method="post" enctype='multipart/form-data'>
+																			<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
+																	
+																			<?php
+																			do_action( 'woocommerce_before_add_to_cart_quantity' );?>
+
+																			<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="googles-cart pgoogles-cart single_add_to_cart_button button alt<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>">
+																			<i class="fas fa-cart-plus"></i>
+																			</button>
+																	
+																			<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
+																		</form>
+																	
+																		<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>
+																	
+																	<?php endif;
+																			
+																	echo '</div>
 																</div>
 																<div class="clearfix"></div>
 															</div>

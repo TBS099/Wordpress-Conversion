@@ -128,9 +128,84 @@ function display_product_gallery($id)
 }
 add_shortcode('product_gallery', 'display_product_gallery');
 
-
+//Allow Comment Replies
 add_action('wp_enqueue_scripts', 'theme_print_scripts');
-
 function theme_print_scripts(){
 if( is_singular() ) wp_enqueue_script('comment-reply');
+}
+
+//Add to cart shortcode which takes product id and quantity as values
+function my_custom_add_to_cart_shortcode( $atts ) {
+    // Parse the shortcode attributes
+    $atts = shortcode_atts( array(
+        'product_id' => '',
+        'dropdown_id' => '',
+    ), $atts, 'my_custom_add_to_cart' );
+
+    // Get the quantity value from the dropdown menu
+    $quantity = isset( $_POST[ $atts['dropdown_id'] ] ) ? intval( $_POST[ $atts['dropdown_id'] ] ) : 1;
+
+    // Add the product to the cart
+    if ( ! empty( $atts['product_id'] ) ) {
+        WC()->cart->add_to_cart( $atts['product_id'], $quantity );
+    }
+
+    // Return an empty string to prevent any content from being output
+    return '';
+}
+add_shortcode( 'my_custom_add_to_cart', 'my_custom_add_to_cart_shortcode' );
+
+
+//Add to cart Execution Function
+function add_to_cart_script() {
+    if ( is_singular( 'product' ) ) {
+        // Single product page
+        ?>
+        <script>
+        function add_to_cart() {
+            var product_id = $('.product').data('product-id');
+            var quantity = jQuery('quantity').val();
+
+            var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '" dropdown_id="' + quantity + '"]';
+            var result =  eval('"' + shortcode + '"');
+
+            console.log(result);
+        }
+        </script>
+        <?php
+    } elseif ( is_archive() || is_front_page() ) {
+        // Archive page or front page
+        ?>
+        <script>
+        jQuery(document).ready(function($) {
+            $('.add-to-cart-button').on('click', function() {
+                var product_id = $(this).data('product-id');
+                var quantity = $(this).closest('.product').find('.quantity').val();
+
+                var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '" dropdown_id="' + quantity + '"]';
+                var result = do_shortcode(shortcode);
+
+                console.log(result);
+            });
+        });
+        </script>
+        <?php
+    }
+}
+add_action( 'wp_head', 'add_to_cart_script' );
+
+// jQuery - cart jQuery script for quantity dropdown
+add_action( 'woocommerce_after_cart', 'cart_quantity_dropdown_js' );
+function cart_quantity_dropdown_js() {
+    ?>
+    <script type="text/javascript">
+    jQuery( function($){
+        $(document.body).on('change blur', 'form.woocommerce-cart-form .quantity select', function(e){
+            var t = $(this), q = t.val(), p = t.parent();
+            $(this).parent().find('input').val($(this).val());
+            console.log($(this).parent().find('input').val());
+        });
+    });
+    </script>
+    <?php
 }

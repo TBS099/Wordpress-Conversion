@@ -287,16 +287,18 @@
 		});
 	});
 </script>
+
+<!-- Smooth Scrolling -->
 <script>
 	jQuery(document).ready(function () {
-		/*
-								var defaults = {wp_footer
+
+								var defaults = {wp_footer,
 									  containerID: 'toTop', // fading element id
 									containerHoverID: 'toTopHover', // fading element hover id
 									scrollSpeed: 1200,
 									easingType: 'linear' 
 								 };
-								*/
+								
 
 		jQuery().UItoTop({
 			easingType: 'easeOutQuart'
@@ -305,6 +307,56 @@
 	});
 </script>
 <!--// end-smoth-scrolling -->
+
+<!-- Add to cart function for pages -->
+<?php if ( is_singular() ) { ?>
+	<script>
+    function add_to_cart() {
+        var product_id = <?php get_the_ID();?>; // Replace with the ID of your product
+        var quantity = jQuery('quantity').val(); // Replace with the ID of your quantity dropdown
+
+        var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '" dropdown_id="' + quantity + '"]';
+        var result = do_shortcode(shortcode);
+
+        console.log(result);
+    }
+    </script>
+
+<?php 
+}
+elseif( is_archive() || is_front_page() ){
+?>
+<script>
+    function add_to_cart() {
+        var product_id = <?php get_the_ID();?>; // Replace with the ID of your product
+
+        var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '"]';
+        var result = do_shortcode(shortcode);
+
+        console.log(result);
+    }
+    </script>
+
+<?php 
+}
+else{
+	"";
+};
+?>
+<!-- End of Add to cart Function for pages -->
+
+<!-- Add to cart Function for featured products -->
+<script>
+    function add_to_cart_featured() {
+        var product_id = <?php $id;?>; // Replace with the ID of your product
+
+        var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '"]';
+        var result = do_shortcode(shortcode);
+
+        console.log(result);
+    }
+    </script>
+<!-- End of Add to cart Function for featured products -->
 
 <?php wp_footer(); ?>
 </body>

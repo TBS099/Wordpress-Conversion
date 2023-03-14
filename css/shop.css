@@ -1723,10 +1723,10 @@ color:rgb(255, 130, 35);
 	margin-left:50px;
 }
 
-/* #respond .comment-respond {
-	display:none;
-} */
+span.woocommerce-price-amount {
+	color:#454546 !important;
+}
 
-/* #respond .comment-form-rating{
-	display: none;
-} */
+.product-men.women_two.shop-gd {
+margin-top:10px;
+}

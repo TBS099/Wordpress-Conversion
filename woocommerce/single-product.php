@@ -38,16 +38,22 @@
 					<h3>
 						<?php echo get_the_title(); ?>
 					</h3>
-					<p><span class="item_price">
-							<?php echo get_woocommerce_currency_symbol() . get_post_meta(get_the_ID(), '_price', true); ?>
-						</span><br>
-						<?php 
-						// var_dump(get_post_meta(get_the_ID(), '_sale_price', true)); 
-						if( !empty(get_post_meta(get_the_ID(), '_sale_price', true))) { ?>
+					<p>
+						<?php
+						if (!empty(get_post_meta(get_the_ID(), '_sale_price', true))) { ?>
+							<span class="item_price">
+								<?php echo get_woocommerce_currency_symbol() . get_post_meta(get_the_ID(), '_sale_price', true); ?>
+							</span><br>
 							<del>
 								<?php echo get_woocommerce_currency_symbol() . get_post_meta(get_the_ID(), '_regular_price', true); ?>
 							</del>
-						<?php } ?>
+							<?php
+						} else { ?>
+							<span class="item_price">
+								<?php echo get_woocommerce_currency_symbol() . get_post_meta(get_the_ID(), '_price', true); ?>
+							</span><br>
+						<?php }
+						; ?>
 					</p>
 					<div class="rating1">
 						<ul class="stars">
@@ -65,13 +71,33 @@
 					<div class="color-quality">
 						<div class="color-quality-right">
 							<h5>Quantity:</h5>
-							<select id="quantity" class="frm-field required sect">
 								<?php
-								for ($x = 1; $x <= 10; $x++) {
-									echo "<option value=" . $x . ">" . $x . "</option>";
+								global $product;
+
+								if ( ! $product->is_purchasable() ) {
+									return;
 								}
-								?>
-							</select>
+								
+								if ( $product->is_in_stock() ) : ?>
+								
+									<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+								
+									<form class="cart" id='product-quantity' action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
+										<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
+								
+										<?php
+										do_action( 'woocommerce_before_add_to_cart_quantity' );
+								
+										woocommerce_quantity_input(
+											array(
+												'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
+												'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
+												'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
+											)
+										);
+								
+										do_action( 'woocommerce_after_add_to_cart_quantity' );
+										?>
 						</div>
 					</div>
 					<div class="occasional">
@@ -91,9 +117,15 @@
 					</div>
 					<div class="occasion-cart">
 						<div class="googles single-item singlepage">
-							<button onclick="addToCart()" class="googles-cart pgoogles-cart">
-								Add to Cart
+							<button type='submit' form='product-quantity' class="googles-cart pgoogles-cart single_add_to_cart_button button alt<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>">
+							<?php echo esc_html( $product->single_add_to_cart_text() ); ?>
 							</button>
+							<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
+	</form>
+
+	<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>
+
+<?php endif; ?>
 						</div>
 					</div>
 					<ul class="footer-social text-left mt-lg-4 mt-3">
@@ -145,7 +177,7 @@
 										<?php the_title(); ?>
 									</h6>
 									<p>
-										<?php the_content(); ?>
+										<?php the_excerpt(); ?>
 									</p>
 								</div>
 							</div>
@@ -169,21 +201,8 @@
 							<div class="tab3">
 
 								<div class="single_page">
-									<h6>Irayz Butterfly Sunglasses (Black)</h6>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue
-										eget nisl ullamcorper, molestie
-										blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit,
-										sed do eiusmod tempor incididunt
-										ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-										exercitation ullamco. labore et dolore
-										magna aliqua.</p>
-									<p class="para">Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque
-										vehicula augue eget nisl ullamcorper, molestie
-										blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit,
-										sed do eiusmod tempor incididunt
-										ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-										exercitation ullamco. labore et dolore
-										magna aliqua.</p>
+									<h6><?php the_title(); ?></h6>
+									<p><?php the_content();?></p>
 								</div>
 							</div>
 						</div>
@@ -226,13 +245,12 @@
 										<div class="product-googles-info slide-img googles">
 											<div class="men-pro-item">
 												<div class="men-thumb-item">
-													<img src="'.get_the_post_thumbnail_url($id,'thumbnail').'" class="img-fluid" alt="">
+													<img src="' . get_the_post_thumbnail_url($id, 'thumbnail') . '" class="img-fluid" alt="">
 													<div class="men-cart-pro">
 														<div class="inner-men-cart-pro">
-															<a href="'.get_permalink($id).'" class="link-product-add-cart">Quick View</a>
+															<a href="' . get_permalink($id) . '" class="link-product-add-cart">Quick View</a>
 														</div>
 													</div>
-													<span class="product-new-top">New</span>
 												</div>
 												<div class="item-info-product">
 
@@ -240,51 +258,34 @@
 														<div class="grid_meta">
 															<div class="product_price">
 																<h4>
-																	<a href="'.get_permalink($id).'">'.get_the_title($id).'</a>
+																	<a href="' . get_permalink($id) . '">' . get_the_title($id) . '</a>
 																</h4>
 																<div class="grid-price mt-2">
-																	<span class="money ">$325.00</span>
+																	<span class="money ">';
+						if (!empty(get_post_meta($id, '_sale_price', true))) { ?>
+							<?php echo get_woocommerce_currency_symbol() . get_post_meta($id, '_sale_price', true); ?>
+							<br>
+							<del>
+								<?php echo get_woocommerce_currency_symbol() . get_post_meta($id, '_regular_price', true); ?>
+							</del>
+							<?php
+						} else { ?>
+
+							<?php echo get_woocommerce_currency_symbol() . get_post_meta($id, '_price', true); ?>
+							<br>
+						<?php }
+						;
+						echo '</span>
 																</div>
 															</div>
 															<ul class="stars">
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																	</a>
-																</li>
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																	</a>
-																</li>
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																	</a>
-																</li>
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star-half-o" aria-hidden="true"></i>
-																	</a>
-																</li>
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star-o" aria-hidden="true"></i>
-																	</a>
-																</li>
+															' . do_shortcode("[product_rating id=" . $id. "]") . '
 															</ul>
 														</div>
 														<div class="googles single-item hvr-outline-out">
-															<form action="#" method="post">
-																<input type="hidden" name="cmd" value="_cart">
-																<input type="hidden" name="add" value="1">
-																<input type="hidden" name="googles_item"
-																	value="Fastrack Aviator">
-																<input type="hidden" name="amount" value="325.00">
-																<button type="submit" class="googles-cart pgoogles-cart">
+																<button type="submit" onclick="addToCart("'.$id.'")" class="googles-cart pgoogles-cart">
 																	<i class="fas fa-cart-plus"></i>
 																</button>
-															</form>
 
 														</div>
 													</div>

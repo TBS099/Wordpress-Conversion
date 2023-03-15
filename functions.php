@@ -47,7 +47,11 @@ function mytheme_add_woocommerce_support()
 }
 add_action('after_setup_theme', 'mytheme_add_woocommerce_support');
 
-//Registering the Menus
+//Adding Widgets and Widget Block Editor support
+add_theme_support('widgets');
+add_theme_support('widgets-block-editor');
+
+//Registering Custom Menus
 register_nav_menus(
     array(
         'top-menu' => __('Top Menu', 'theme'),
@@ -56,6 +60,20 @@ register_nav_menus(
 
 );
 
+//Registering Custom Sidebars
+function shop_sidebar(){
+    register_sidebar(
+
+        array(
+            'name'=>'Shop Sidebar',
+            'id'=>'shop-sidebar',
+            'before_title'=>'<h4 class="widget-title">',
+            'after_title'=>'</h4>',
+        )
+
+        );
+};
+add_action('widgets_init','shop_sidebar');
 
 //retrieving and displaying product rating
 add_shortcode('product_rating', 'display_the_product_rating');
@@ -209,3 +227,114 @@ function cart_quantity_dropdown_js() {
     </script>
     <?php
 }
+
+// Adding Custom Meta Box Field to Shop Page
+function shop_banner_metabox()
+{
+    add_meta_box("shop_banner_metabox_field", "Shop Banner Meta Box", "shop_banner_metabox_field", "page", "side");
+}
+add_action('add_meta_boxes', 'shop_banner_metabox');
+
+//Creating the Custom Meta Box Field
+function shop_banner_metabox_field($post){
+
+    // Retrieve the current value of the custom field
+    $banner_url_top=wp_get_attachment_image_url(get_post_meta(get_the_ID(), 'banner_img_top', true));
+    $banner_url_left=wp_get_attachment_image_url(get_post_meta(get_the_ID(), 'banner_img_left', true));
+    $banner_url_right=wp_get_attachment_image_url(get_post_meta(get_the_ID(), 'banner_img_right', true));
+    ?>
+        <label for="shop_page_field">Top Banner Picture:</label><br>
+        <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_top" value="<?php echo esc_attr( $banner_url_top ); ?>" /><br><br>
+
+        <label for="shop_page_field">Left Banner Picture:</label><br>
+        <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_left" value="<?php echo esc_attr( $banner_url_left ); ?>" /><br><br>
+
+        <label for="shop_page_field">Right Banner Picture:</label><br>
+        <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_right" value="<?php echo esc_attr( $banner_url_right ); ?>" /><br><br>
+    <?php
+
+}
+
+//Saving Images from Meta Field
+function save_banner_img(){
+
+    //Banner Image Top
+    if (isset($_FILES['shop_banner_field_top'])) {
+        $file = $_FILES['shop_banner_field_top'];
+    
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+    
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('shop_banner_field_top', 0);
+    
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+    
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'banner_img_top', $attachment_id);
+    
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+    
+
+    //Banner Image Left
+    if (isset($_FILES['shop_banner_field_left'])) {
+        $file = $_FILES['shop_banner_field_left'];
+    
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+    
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('shop_banner_field_left', 0);
+    
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+    
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'banner_img_left', $attachment_id);
+    
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+    
+    //Banner Image Right
+    if (isset($_FILES['shop_banner_field_right'])) {
+        $file = $_FILES['shop_banner_field_right'];
+    
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+    
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('shop_banner_field_right', 0);
+    
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+    
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'banner_img_right', $attachment_id);
+    
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+}
+add_action('save_post', 'save_banner_img');

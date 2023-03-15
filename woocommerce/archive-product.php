@@ -1,7 +1,7 @@
 <?php get_header(); ?>
-
+<?php $banner_img_top=wp_get_attachment_image_url(get_post_meta(get_option( 'woocommerce_shop_page_id' ), 'banner_img_top', true));?>
 <!-- banner -->
-<div class="banner_inner">
+<div class="banner_inner" style="background-image: url('<?php echo $banner_img_top; ?>');no-repeat 0px -73px;">
 	<div class="services-breadcrumb">
 		<div class="inner_breadcrumb">
 
@@ -25,134 +25,9 @@
 			<div class="row">
 				<!-- product left -->
 				<div class="side-bar col-lg-3">
-					<div class="search-hotel">
-						<h3 class="agileits-sear-head">Search Here..</h3>
-						<form action="#" method="post">
-							<input class="form-control" type="search" name="search" placeholder="Search here..."
-								required="">
-							<button class="btn1">
-								<i class="fas fa-search"></i>
-							</button>
-							<div class="clearfix"> </div>
-						</form>
-					</div>
-					<!-- price range -->
-					<div class="range">
-						<h3 class="agileits-sear-head">Price range</h3>
-						<ul class="dropdown-menu6">
-							<li>
-
-								<div id="slider-range"></div>
-								<input type="text" id="amount"
-									style="border: 0; color: #ffffff; font-weight: normal;" />
-							</li>
-						</ul>
-					</div>
-					<!-- //price range -->
-					<!--preference -->
-					<div class="left-side">
-						<h3 class="agileits-sear-head">Deal Offer On</h3>
-						<ul>
-							<li>
-								<input type="checkbox" class="checked">
-								<span class="span">Backpack</span>
-							</li>
-							<li>
-								<input type="checkbox" class="checked">
-								<span class="span">Phone Pocket</span>
-							</li>
-
-						</ul>
-					</div>
-					<!-- // preference -->
-					<!-- discounts -->
-					<div class="left-side">
-						<h3 class="agileits-sear-head">Discount</h3>
-						<ul>
-							<li>
-								<input type="checkbox" class="checked">
-								<span class="span">5% or More</span>
-							</li>
-							<li>
-								<input type="checkbox" class="checked">
-								<span class="span">10% or More</span>
-							</li>
-							<li>
-								<input type="checkbox" class="checked">
-								<span class="span">20% or More</span>
-							</li>
-							<li>
-								<input type="checkbox" class="checked">
-								<span class="span">30% or More</span>
-							</li>
-							<li>
-								<input type="checkbox" class="checked">
-								<span class="span">50% or More</span>
-							</li>
-							<li>
-								<input type="checkbox" class="checked">
-								<span class="span">60% or More</span>
-							</li>
-						</ul>
-					</div>
-					<!-- //discounts -->
-					<!-- reviews -->
-					<div class="customer-rev left-side">
-						<h3 class="agileits-sear-head">Customer Review</h3>
-						<ul>
-							<li>
-								<a href="#">
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<span>5.0</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star-o" aria-hidden="true"></i>
-									<span>4.0</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star-half-o" aria-hidden="true"></i>
-									<i class="fa fa-star-o" aria-hidden="true"></i>
-									<span>3.5</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star-o" aria-hidden="true"></i>
-									<i class="fa fa-star-o" aria-hidden="true"></i>
-									<span>3.0</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star-half-o" aria-hidden="true"></i>
-									<i class="fa fa-star-o" aria-hidden="true"></i>
-									<i class="fa fa-star-o" aria-hidden="true"></i>
-									<span>2.5</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-					<!-- //reviews -->
+					<?php if(is_active_sidebar('shop-sidebar')):
+					    dynamic_sidebar('shop-sidebar');
+					endif;?>
 				</div>
 				<!-- //product left -->
 				<!--/product right-->
@@ -186,7 +61,7 @@
 													<div class="product-googles-info googles">
 														<div class="men-pro-item">
 															<div class="men-thumb-item">
-																<img src="'.get_the_post_thumbnail_url($post->ID,'medium').'" class="img-fluid" alt="">
+																<img src="'.get_the_post_thumbnail_url($post->ID,'thumbnail').'" class="img-fluid" alt="">
 																<div class="men-cart-pro">
 																	<div class="inner-men-cart-pro">
 																		<a href="'.get_permalink(get_the_ID()).'" class="link-product-add-cart">Quick

@@ -1729,4 +1729,9 @@ span.woocommerce-price-amount {
 
 .product-men.women_two.shop-gd {
 margin-top:10px;
+min-width:300px;
+}
+
+.widget {
+	list-style: none;
 }

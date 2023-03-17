@@ -1666,9 +1666,15 @@ span.item_price {
 }
 
 /*-- //Responsive --*/
+
 /* changes start from here */
+body {
+	width:100%;
+}
+
 .men-thumb-item {
-	height: 300px;;
+	height: 300px;
+	margin-bottom:20px;
 }
 
 .product-googles-info {
@@ -1729,9 +1735,46 @@ span.woocommerce-price-amount {
 
 .product-men.women_two.shop-gd {
 margin-top:10px;
-min-width:300px;
+min-width:200px;
 }
 
 .widget {
 	list-style: none;
+}
+
+@media(max-width:1050px) {
+	.responsive-height{
+		width:75% !important;
+	}
+}
+@media(min-width:1250px) {
+	.responsive-height{
+		width:85% !important;
+	}
+}
+
+.sales-product-img {
+	width:100%;
+	height:auto;
+}
+
+.black {
+	color:#000;
+}
+
+.widget-title {
+	margin-bottom:10px;
+}
+
+.list-styling {
+	list-style: none;
+}
+
+.gaps {
+	margin-left:0px !important;
+	margin-right:0px !important;
+}
+
+.top-margin {
+	margin-top:-15px;
 }

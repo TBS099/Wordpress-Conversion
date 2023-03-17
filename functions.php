@@ -61,19 +61,21 @@ register_nav_menus(
 );
 
 //Registering Custom Sidebars
-function shop_sidebar(){
+function shop_sidebar()
+{
     register_sidebar(
 
         array(
-            'name'=>'Shop Sidebar',
-            'id'=>'shop-sidebar',
-            'before_title'=>'<h4 class="widget-title">',
-            'after_title'=>'</h4>',
+            'name' => 'Shop Sidebar',
+            'id' => 'shop-sidebar',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>',
         )
 
-        );
-};
-add_action('widgets_init','shop_sidebar');
+    );
+}
+;
+add_action('widgets_init', 'shop_sidebar');
 
 //retrieving and displaying product rating
 add_shortcode('product_rating', 'display_the_product_rating');
@@ -148,82 +150,91 @@ add_shortcode('product_gallery', 'display_product_gallery');
 
 //Allow Comment Replies
 add_action('wp_enqueue_scripts', 'theme_print_scripts');
-function theme_print_scripts(){
-if( is_singular() ) wp_enqueue_script('comment-reply');
+function theme_print_scripts()
+{
+    if (is_singular())
+        wp_enqueue_script('comment-reply');
 }
 
 //Add to cart shortcode which takes product id and quantity as values
-function my_custom_add_to_cart_shortcode( $atts ) {
+function my_custom_add_to_cart_shortcode($atts)
+{
     // Parse the shortcode attributes
-    $atts = shortcode_atts( array(
-        'product_id' => '',
-        'dropdown_id' => '',
-    ), $atts, 'my_custom_add_to_cart' );
+    $atts = shortcode_atts(
+        array(
+            'product_id' => '',
+            'dropdown_id' => '',
+        ),
+        $atts,
+        'my_custom_add_to_cart'
+    );
 
     // Get the quantity value from the dropdown menu
-    $quantity = isset( $_POST[ $atts['dropdown_id'] ] ) ? intval( $_POST[ $atts['dropdown_id'] ] ) : 1;
+    $quantity = isset($_POST[$atts['dropdown_id']]) ? intval($_POST[$atts['dropdown_id']]) : 1;
 
     // Add the product to the cart
-    if ( ! empty( $atts['product_id'] ) ) {
-        WC()->cart->add_to_cart( $atts['product_id'], $quantity );
+    if (!empty($atts['product_id'])) {
+        WC()->cart->add_to_cart($atts['product_id'], $quantity);
     }
 
     // Return an empty string to prevent any content from being output
     return '';
 }
-add_shortcode( 'my_custom_add_to_cart', 'my_custom_add_to_cart_shortcode' );
+add_shortcode('my_custom_add_to_cart', 'my_custom_add_to_cart_shortcode');
 
 
 //Add to cart Execution Function
-function add_to_cart_script() {
-    if ( is_singular( 'product' ) ) {
+function add_to_cart_script()
+{
+    if (is_singular('product')) {
         // Single product page
         ?>
         <script>
-        function add_to_cart() {
-            var product_id = $('.product').data('product-id');
-            var quantity = jQuery('quantity').val();
+            function add_to_cart() {
+                var product_id = $('.product').data('product-id');
+                var quantity = jQuery('quantity').val();
 
-            var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '" dropdown_id="' + quantity + '"]';
-            var result =  eval('"' + shortcode + '"');
+                var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '" dropdown_id="' + quantity + '"]';
+                var result = eval('"' + shortcode + '"');
 
-            console.log(result);
-        }
+                console.log(result);
+            }
         </script>
         <?php
-    } elseif ( is_archive() || is_front_page() ) {
+    } elseif (is_archive() || is_front_page()) {
         // Archive page or front page
         ?>
         <script>
-        jQuery(document).ready(function($) {
-            $('.add-to-cart-button').on('click', function() {
-                var product_id = $(this).data('product-id');
-                var quantity = $(this).closest('.product').find('.quantity').val();
+            jQuery(document).ready(function ($) {
+                $('.add-to-cart-button').on('click', function () {
+                    var product_id = $(this).data('product-id');
+                    var quantity = $(this).closest('.product').find('.quantity').val();
 
-                var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '" dropdown_id="' + quantity + '"]';
-                var result = do_shortcode(shortcode);
+                    var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '" dropdown_id="' + quantity + '"]';
+                    var result = do_shortcode(shortcode);
 
-                console.log(result);
+                    console.log(result);
+                });
             });
-        });
         </script>
         <?php
     }
 }
-add_action( 'wp_head', 'add_to_cart_script' );
+add_action('wp_head', 'add_to_cart_script');
 
 // jQuery - cart jQuery script for quantity dropdown
-add_action( 'woocommerce_after_cart', 'cart_quantity_dropdown_js' );
-function cart_quantity_dropdown_js() {
+add_action('woocommerce_after_cart', 'cart_quantity_dropdown_js');
+function cart_quantity_dropdown_js()
+{
     ?>
     <script type="text/javascript">
-    jQuery( function($){
-        $(document.body).on('change blur', 'form.woocommerce-cart-form .quantity select', function(e){
-            var t = $(this), q = t.val(), p = t.parent();
-            $(this).parent().find('input').val($(this).val());
-            console.log($(this).parent().find('input').val());
+        jQuery(function ($) {
+            $(document.body).on('change blur', 'form.woocommerce-cart-form .quantity select', function (e) {
+                var t = $(this), q = t.val(), p = t.parent();
+                $(this).parent().find('input').val($(this).val());
+                console.log($(this).parent().find('input').val());
+            });
         });
-    });
     </script>
     <?php
 }
@@ -231,110 +242,477 @@ function cart_quantity_dropdown_js() {
 // Adding Custom Meta Box Field to Shop Page
 function shop_banner_metabox()
 {
-    add_meta_box("shop_banner_metabox_field", "Shop Banner Meta Box", "shop_banner_metabox_field", "page", "side");
+    if (get_the_ID() == get_option('woocommerce_shop_page_id')) 
+    {
+        add_meta_box("shop_banner_metabox_field", "Shop Banner Images", "shop_banner_metabox_field", "page", "side");
+    }
 }
 add_action('add_meta_boxes', 'shop_banner_metabox');
 
+
+
 //Creating the Custom Meta Box Field
-function shop_banner_metabox_field($post){
-
-    // Retrieve the current value of the custom field
-    $banner_url_top=wp_get_attachment_image_url(get_post_meta(get_the_ID(), 'banner_img_top', true));
-    $banner_url_left=wp_get_attachment_image_url(get_post_meta(get_the_ID(), 'banner_img_left', true));
-    $banner_url_right=wp_get_attachment_image_url(get_post_meta(get_the_ID(), 'banner_img_right', true));
+function shop_banner_metabox_field()
+{
     ?>
-        <label for="shop_page_field">Top Banner Picture:</label><br>
-        <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_top" value="<?php echo esc_attr( $banner_url_top ); ?>" /><br><br>
+    <label for="shop_page_field">Top Banner Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_top"/><br><br>
 
-        <label for="shop_page_field">Left Banner Picture:</label><br>
-        <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_left" value="<?php echo esc_attr( $banner_url_left ); ?>" /><br><br>
+    <label for="shop_page_field">Left Banner Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_left"/><br><br>
 
-        <label for="shop_page_field">Right Banner Picture:</label><br>
-        <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_right" value="<?php echo esc_attr( $banner_url_right ); ?>" /><br><br>
+    <label for="shop_page_field">Right Banner Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_right"/><br><br>
     <?php
-
 }
 
 //Saving Images from Meta Field
-function save_banner_img(){
+function save_banner_img()
+{
 
     //Banner Image Top
     if (isset($_FILES['shop_banner_field_top'])) {
         $file = $_FILES['shop_banner_field_top'];
-    
+
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
             echo 'Error uploading file.';
             exit;
         }
-    
+
         // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
         $attachment_id = media_handle_upload('shop_banner_field_top', 0);
-    
+
         // Check for errors in media_handle_upload
         if (is_wp_error($attachment_id)) {
             echo $attachment_id->get_error_message();
             exit;
         }
-    
+
         // Update custom meta field with attachment ID
         update_post_meta(get_the_ID(), 'banner_img_top', $attachment_id);
-    
+
         // Display success message
         echo 'File uploaded successfully!';
     }
-    
+
 
     //Banner Image Left
     if (isset($_FILES['shop_banner_field_left'])) {
         $file = $_FILES['shop_banner_field_left'];
-    
+
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
             echo 'Error uploading file.';
             exit;
         }
-    
+
         // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
         $attachment_id = media_handle_upload('shop_banner_field_left', 0);
-    
+
         // Check for errors in media_handle_upload
         if (is_wp_error($attachment_id)) {
             echo $attachment_id->get_error_message();
             exit;
         }
-    
+
         // Update custom meta field with attachment ID
         update_post_meta(get_the_ID(), 'banner_img_left', $attachment_id);
-    
+
         // Display success message
         echo 'File uploaded successfully!';
     }
-    
+
     //Banner Image Right
     if (isset($_FILES['shop_banner_field_right'])) {
         $file = $_FILES['shop_banner_field_right'];
-    
+
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
             echo 'Error uploading file.';
             exit;
         }
-    
+
         // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
         $attachment_id = media_handle_upload('shop_banner_field_right', 0);
-    
+
         // Check for errors in media_handle_upload
         if (is_wp_error($attachment_id)) {
             echo $attachment_id->get_error_message();
             exit;
         }
-    
+
         // Update custom meta field with attachment ID
         update_post_meta(get_the_ID(), 'banner_img_right', $attachment_id);
-    
+
         // Display success message
         echo 'File uploaded successfully!';
     }
 }
 add_action('save_post', 'save_banner_img');
+
+// Adding Custom Meta Box Field to Front Page
+function front_page_slider_metabox()
+{
+    if (get_the_ID() == get_option('page_on_front')) 
+    {
+        add_meta_box("front_page_slider_metabox_field", "Slider Images", "front_page_slider_metabox_field", "page", "side");
+    }
+}
+add_action('add_meta_boxes', 'front_page_slider_metabox');
+
+
+
+//Creating the Custom Meta Box Field
+function front_page_slider_metabox_field()
+{
+    ?>
+    <label>1st Slider Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="front_page_slider1"/><br><br>
+
+    <label>2nd Slider Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="front_page_slider2"/><br><br>
+
+    <label>3rd Slider Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="front_page_slider3"/><br><br>
+
+    <label>4th Slider Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="front_page_slider4"/><br><br>
+    
+    <?php
+}
+
+//Saving Images from Meta Field
+function save_front_page_slider()
+{
+
+    //Slider 1
+    if (isset($_FILES['front_page_slider1'])) {
+        $file = $_FILES['front_page_slider1'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('front_page_slider1', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'slider1', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+
+
+    //Slider 2
+    if (isset($_FILES['front_page_slider2'])) {
+        $file = $_FILES['front_page_slider2'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('front_page_slider2', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'slider2', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+
+    //Slider 3
+    if (isset($_FILES['front_page_slider3'])) {
+        $file = $_FILES['front_page_slider3'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('front_page_slider3', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'slider3', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+
+    //Slider 4
+    if (isset($_FILES['front_page_slider4'])) {
+        $file = $_FILES['front_page_slider4'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('front_page_slider4', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'slider4', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+}
+add_action('save_post', 'save_front_page_slider');
+
+//Adding custom metabox to Front Page
+function banner_metabox()
+{
+    if (get_the_ID() == get_option('page_on_front')) 
+    {
+        add_meta_box("banner_metabox_field", "Banner Images", "banner_metabox_field", "page", "side");
+    }
+}
+add_action('add_meta_boxes', 'banner_metabox');
+
+
+
+//Creating the Custom Meta Box Field
+function banner_metabox_field()
+{
+    ?>
+    <label>Timer Banner Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="banner_field_top"/><br><br>
+
+    <label>Left Banner Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="banner_field_left"/><br><br>
+
+    <label>Right Banner Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="banner_field_right"/><br><br>
+    <?php
+}
+
+//Saving Images from Meta Field
+function save_front_page_banner_img()
+{
+
+    //Banner Image Top
+    if (isset($_FILES['banner_field_top'])) {
+        $file = $_FILES['banner_field_top'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('banner_field_top', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'fp_banner_img_top', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+
+
+    //Banner Image Left
+    if (isset($_FILES['banner_field_left'])) {
+        $file = $_FILES['banner_field_left'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('banner_field_left', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'fp_banner_img_left', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+
+    //Banner Image Right
+    if (isset($_FILES['banner_field_right'])) {
+        $file = $_FILES['banner_field_right'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading file.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('banner_field_right', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'fp_banner_img_right', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+}
+add_action('save_post', 'save_front_page_banner_img');
+
+
+//Creating a sales products widget
+class woocommerce_conversion_sales_product_widget extends WP_Widget
+{
+    function __construct()
+    {
+        $widget_options = array(
+            'classname' => 'sales_products_widget',
+            'description' => 'This is a Widget to display products on sale',
+        );
+        parent::__construct('sales_products_widget', 'Sales Products Widget', $widget_options);
+    }
+
+    //Front end display of widget
+    function widget($args, $instance)
+    {
+        //Check if user entered how many products to display. Default=5 if field left empty
+        $number_of_products = !empty($instance['number_of_products']) ? absint($instance['number_of_products']) : 5;
+
+        // Query arguments for sales products
+        $query_args = array(
+            'post_type' => 'product',
+            'meta_query' => array(
+                array(
+                    'key' => '_sale_price',
+                    'value' => '0',
+                    'compare' => '>',
+                    'type' => 'NUMERIC'
+                )
+            ),
+            'posts_per_page' => $number_of_products,
+            'orderby' => 'rand'
+        );
+        $sales_products = new WP_Query($query_args);
+
+        echo $args['before_widget'];
+
+        $title = 'Products on Sale';
+        echo $args['before_title'] . $title . $args['after_title'];
+
+        if ($sales_products->have_posts()) {
+            echo '<ul>';
+            while ($sales_products->have_posts()) {
+                $sales_products->the_post();
+                echo '<li>
+                        <div class="row">
+                            <div class="col-5">
+                                <img src="' . get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') . '" class="sales-product-img">
+                            </div>
+                            <div class="col-7">
+                                <h7><a href="' . get_permalink() . '" class="black">' . get_the_title() . '</a></h7><br>
+                                <div class="grid-price mt-2">
+									<span class="money ">';
+                echo get_woocommerce_currency_symbol() . get_post_meta(get_the_ID(), '_sale_price', true);
+                echo '<br>
+                                        <del>';
+                echo get_woocommerce_currency_symbol() . get_post_meta(get_the_ID(), '_regular_price', true);
+                echo '</del>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </li>';
+            }
+            echo '</ul>';
+        } else {
+            echo '<p>No sales products found.</p>';
+        }
+
+        wp_reset_postdata();
+
+        echo $args['after_widget'];
+    }
+
+    function form($instance)
+    {
+
+        $number_of_products = isset($instance['number_of_products']) ? absint($instance['number_of_products']) : 5;
+
+        // Number of products to display
+        echo '<p><label for="' . $this->get_field_id('number_of_products') . '">' . __('Number of products to display:') . '</label>';
+        echo '<input class="widefat" id="' . $this->get_field_id('number_of_products') . '" name="' . $this->get_field_name('number_of_products') . '" type="number" min="1" step="1" value="' . esc_attr($number_of_products) . '"></p>';
+
+    }
+
+    // Sanitize widget form values as they are saved
+    public function update($new_instance, $old_instance)
+    {
+
+        $instance = array();
+        $instance['number_of_products'] = isset($new_instance['number_of_products']) ? absint($new_instance['number_of_products']) : 5;
+
+        return $instance;
+
+    }
+}
+
+
+function update($new_instance, $old_instance)
+{
+    $instance = array();
+    $instance['title'] = (!empty($new_instance['title'])) ? strip_tags($new_instance['title']) : '';
+    return $instance;
+}
+
+function load_woocommerce_conversion_sales_product_widget()
+{
+    register_widget('woocommerce_conversion_sales_product_widget');
+}
+add_action('widgets_init', 'load_woocommerce_conversion_sales_product_widget');

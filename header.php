@@ -24,6 +24,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.location.href = add_to_cart_url;
 		}
 	</script>
+	<style>
+		.carousel-item {
+			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true));?>) no-repeat;
+			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true));?>) no-repeat;
+			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true));?>) no-repeat;
+			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true));?>) no-repeat;
+			background-size: cover;
+		}
+
+		.carousel-item.item2 {
+			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true));?>) no-repeat;
+			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true));?>) no-repeat;
+			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true));?>) no-repeat;
+			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true));?>) no-repeat;
+			background-size: cover;
+		}
+
+		.carousel-item.item3 {
+			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true));?>) no-repeat;
+			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true));?>) no-repeat;
+			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true));?>) no-repeat;
+			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true));?>) no-repeat;
+			background-size: cover;
+		}
+
+		.carousel-item.item4 {
+			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true));?>) no-repeat;
+			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true));?>) no-repeat;
+			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true));?>) no-repeat;
+			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true));?>) no-repeat;
+			background-size: cover;
+		}
+
+		.middle-text-info {
+			background: url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'fp_banner_img_top', true));?>) no-repeat 0px 0px;
+		}
+	</style>
 </head>
 
 <body>

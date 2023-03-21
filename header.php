@@ -26,39 +26,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</script>
 	<style>
 		.carousel-item {
-			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true));?>) no-repeat;
-			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true));?>) no-repeat;
-			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true));?>) no-repeat;
-			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true));?>) no-repeat;
+			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true)); ?>) no-repeat;
+			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true)); ?>) no-repeat;
+			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true)); ?>) no-repeat;
+			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider1', true)); ?>) no-repeat;
 			background-size: cover;
 		}
 
 		.carousel-item.item2 {
-			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true));?>) no-repeat;
-			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true));?>) no-repeat;
-			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true));?>) no-repeat;
-			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true));?>) no-repeat;
+			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true)); ?>) no-repeat;
+			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true)); ?>) no-repeat;
+			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true)); ?>) no-repeat;
+			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider2', true)); ?>) no-repeat;
 			background-size: cover;
 		}
 
 		.carousel-item.item3 {
-			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true));?>) no-repeat;
-			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true));?>) no-repeat;
-			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true));?>) no-repeat;
-			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true));?>) no-repeat;
+			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true)); ?>) no-repeat;
+			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true)); ?>) no-repeat;
+			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true)); ?>) no-repeat;
+			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider3', true)); ?>) no-repeat;
 			background-size: cover;
 		}
 
 		.carousel-item.item4 {
-			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true));?>) no-repeat;
-			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true));?>) no-repeat;
-			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true));?>) no-repeat;
-			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true));?>) no-repeat;
+			background: -webkit-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true)); ?>) no-repeat;
+			background: -moz-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true)); ?>) no-repeat;
+			background: -ms-linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true)); ?>) no-repeat;
+			background: linear-gradient(rgba(23, 22, 23, 0.2), rgba(23, 22, 23, 0.5)), url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'slider4', true)); ?>) no-repeat;
 			background-size: cover;
 		}
 
 		.middle-text-info {
-			background: url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'fp_banner_img_top', true));?>) no-repeat 0px 0px;
+			background: url(<?php echo wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'front_page_banner_img_top', true)); ?>) no-repeat 0px 0px;
 		}
 	</style>
 </head>
@@ -69,17 +69,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<header>
 			<div class="row">
 				<div class="col-md-3 top-info text-left mt-lg-4">
-					<h6>Need Help</h6>
+					<h6>Need Help?</h6>
 					<ul>
 						<li>
 							<i class="fas fa-phone"></i> Call
 						</li>
-						<li class="number-phone mt-3">12345678099</li>
+						<li class="number-phone mt-3">
+							<?php echo get_theme_mod('phone_number'); ?>
+						</li>
 					</ul>
 				</div>
 				<div class="col-md-6 logo-w3layouts text-center">
 					<h1 class="logo-w3layouts">
-						<a class="navbar-brand" href="index.html">
+						<a class="navbar-brand" href="<?php echo home_url(); ?>">
 							Goggles </a>
 					</h1>
 				</div>
@@ -87,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-3 top-info-cart text-right mt-lg-4">
 					<ul class="cart-inner-info">
 						<li class="button-log">
-							<a class="btn-open" href="#">
+							<a class="btn-open" href="">
 								<span class="fa fa-user" aria-hidden="true"></span>
 							</a>
 						</li>
@@ -98,46 +100,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							$cart_contents_count = $woocommerce->cart->cart_contents_count;
 							$cart_total = $woocommerce->cart->get_cart_total();
 							?>
-
-							<button href="<?php echo $cart_url; ?>" class="top_googles_cart cart-contents">
-								<i class="fa fa-shopping-cart"></i><br>
-								<?php echo $cart_contents_count . ' items - ' . $cart_total; ?>
-							</button>
-							</form>
+							<a href="<?php echo $cart_url; ?>">
+								<button class="top_googles_cart" target="_blank">
+									<i class="fa fa-shopping-cart"></i><br>
+									<?php echo $cart_contents_count . ' items - ' . $cart_total; ?>
+								</button>
+							</a>
 						</li>
 					</ul>
-					<!---->
-					<div class="overlay-login text-left">
-						<button type="button" class="overlay-close1">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button>
-						<div class="wrap">
-							<h5 class="text-center mb-4">Login Now</h5>
-							<div class="login p-5 bg-dark mx-auto mw-100">
-								<form action="#" method="post">
-									<div class="form-group">
-										<label class="mb-2">Email address</label>
-										<input type="email" class="form-control" id="exampleInputEmail1"
-											aria-describedby="emailHelp" placeholder="" required="">
-										<small id="emailHelp" class="form-text text-muted">We'll never share your email
-											with anyone else.</small>
-									</div>
-									<div class="form-group">
-										<label class="mb-2">Password</label>
-										<input type="password" class="form-control" id="exampleInputPassword1"
-											placeholder="" required="">
-									</div>
-									<div class="form-check mb-2">
-										<input type="checkbox" class="form-check-input" id="exampleCheck1">
-										<label class="form-check-label" for="exampleCheck1">Check me out</label>
-									</div>
-									<button type="submit" class="btn btn-primary submit mb-4">Sign In</button>
-
-								</form>
-							</div>
-							<!---->
-						</div>
-					</div>
 					<!---->
 				</div>
 			</div>

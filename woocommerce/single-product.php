@@ -6,10 +6,10 @@
 
 			<ul class="short">
 				<li>
-					<a href="index.html">Home</a>
+					<a href="<?php echo get_home_url();?>">Home</a>
 					<i>|</i>
 				</li>
-				<li>Single Page</li>
+				<li><?php echo get_the_title();?></li>
 			</ul>
 		</div>
 	</div>
@@ -103,21 +103,6 @@
 									?>
 							</div>
 						</div>
-						<div class="occasional">
-							<h5>Types :</h5>
-							<div class="colr ert">
-								<label class="radio"><input type="radio" name="radio" checked=""><i></i> Irayz
-									Butterfly(Black)</label>
-							</div>
-							<div class="colr">
-								<label class="radio"><input type="radio" name="radio"><i></i> Irayz Butterfly (Grey)</label>
-							</div>
-							<div class="colr">
-								<label class="radio"><input type="radio" name="radio"><i></i> Irayz Butterfly
-									(white)</label>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
 						<div class="occasion-cart">
 							<div class="googles single-item singlepage">
 								<button type='submit' form='product-quantity'
@@ -136,31 +121,20 @@
 					<ul class="footer-social text-left mt-lg-4 mt-3">
 						<li>Share On : </li>
 						<li class="mx-2">
-							<a href="#">
+							<a href="<?php echo get_theme_mod('facebook');?>">
 								<span class="fab fa-facebook-f"></span>
 							</a>
 						</li>
 						<li class="mx-2">
-							<a href="#">
+							<a href="<?php echo get_theme_mod('twitter');?>">
 								<span class="fab fa-twitter"></span>
 							</a>
 						</li>
 						<li class="mx-2">
-							<a href="#">
-								<span class="fab fa-google-plus-g"></span>
-							</a>
-						</li>
-						<li class="mx-2">
-							<a href="#">
+							<a href="<?php echo get_theme_mod('linkedin');?>">
 								<span class="fab fa-linkedin-in"></span>
 							</a>
 						</li>
-						<li class="mx-2">
-							<a href="#">
-								<span class="fas fa-rss"></span>
-							</a>
-						</li>
-
 					</ul>
 
 				</div>
@@ -235,7 +209,7 @@
 					$results = $wpdb->get_results("
 					SELECT * 
 					FROM {$wpdb->prefix}term_relationships
-					WHERE term_taxonomy_id = 11
+					WHERE term_taxonomy_id = 8
 					");
 					//Singling id from array
 					$ids = array();

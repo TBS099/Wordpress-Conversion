@@ -8,9 +8,9 @@
 			<ul class="short">
 				<li>
 					<a href="index.html">Home</a>
-					<i>|</i>
+					<i class='shop-page'>|</i>
 				</li>
-				<li>Shop</li>
+				<li class='shop-page'>Shop</li>
 			</ul>
 		</div>
 	</div>
@@ -166,7 +166,7 @@
 						$results = $wpdb->get_results("
 					SELECT * 
 					FROM {$wpdb->prefix}term_relationships
-					WHERE term_taxonomy_id = 11
+					WHERE term_taxonomy_id = 8
 					");
 						//Singling id from array
 						$ids = array();

@@ -1331,7 +1331,7 @@ ul.short {
 ul.short li {
     display: inline-block;
     text-transform: uppercase;
-    color: #fff;
+    color: #000;
     font-size: 0.9em;
     font-weight: 600;
     letter-spacing: 2px;
@@ -1694,7 +1694,7 @@ ul.links li a:hover {
     height: 32px;
     border: none;
     text-indent: 100%;
-    background: url(../images/up_arrow.png) no-repeat 0px 0px;
+    background: url(./images/up_arrow.png) no-repeat 0px 0px;
 }
 
 #toTopHover {
@@ -2665,4 +2665,12 @@ ul li {
 
 body {
     width:100%;
+}
+
+.footer-text-color a{
+    color:#959596 !important;
+}
+
+button.top_googles_cart {
+    pointer-events: auto;
 }

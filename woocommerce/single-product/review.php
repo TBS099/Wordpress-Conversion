@@ -58,7 +58,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			);
 			comment_reply_link( $args ); 
 			
-			// do_action( 'woocommerce_review_before_comment_text', $comment );
+			do_action( 'woocommerce_review_before_comment_text', $comment );
 
 			/**
 			 * The woocommerce_review_comment_text hook

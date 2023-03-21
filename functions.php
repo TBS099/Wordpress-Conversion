@@ -37,8 +37,10 @@ function load_stylesheets()
     //Google Fonts
     wp_enqueue_style('googlefont1', "https://fonts.googleapis.com/css?family=Inconsolata:400,700", array(), '1.0', 'all');
     wp_enqueue_style('googlefont2', "https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800", array(), '1.0', 'all');
-
 }
+
+//Adding Customizer.php
+include('customizer.php');
 
 //Adding WooCommerce Support
 function mytheme_add_woocommerce_support()
@@ -55,7 +57,6 @@ add_theme_support('widgets-block-editor');
 register_nav_menus(
     array(
         'top-menu' => __('Top Menu', 'theme'),
-        'footer-menu' => __('Footer Menu', 'theme'),
     )
 
 );
@@ -73,8 +74,51 @@ function shop_sidebar()
         )
 
     );
-}
-;
+
+    register_sidebar(
+
+        array(
+            'name' => 'Footer Sidebar 1',
+            'id' => 'footer-sidebar1',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>',
+        )
+
+    );
+
+    register_sidebar(
+
+        array(
+            'name' => 'Footer Sidebar 2',
+            'id' => 'footer-sidebar2',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>',
+        )
+
+    );
+
+    register_sidebar(
+
+        array(
+            'name' => 'Footer Sidebar 3',
+            'id' => 'footer-sidebar3',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>',
+        )
+
+    );
+
+    register_sidebar(
+
+        array(
+            'name' => 'Footer Sidebar 4',
+            'id' => 'footer-sidebar4',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>',
+        )
+
+    );
+};
 add_action('widgets_init', 'shop_sidebar');
 
 //retrieving and displaying product rating
@@ -90,7 +134,7 @@ function display_the_product_rating($atts)
         'product_rating'
     );
 
-    if (isset($atts['id']) && $atts['id'] > 0):
+    if (isset($atts['id']) && $atts['id'] > 0) :
 
         // Get an instance of the WC_Product Object
         $product = wc_get_product($atts['id']);
@@ -188,7 +232,7 @@ function add_to_cart_script()
 {
     if (is_singular('product')) {
         // Single product page
-        ?>
+?>
         <script>
             function add_to_cart() {
                 var product_id = $('.product').data('product-id');
@@ -200,13 +244,13 @@ function add_to_cart_script()
                 console.log(result);
             }
         </script>
-        <?php
+    <?php
     } elseif (is_archive() || is_front_page()) {
         // Archive page or front page
-        ?>
+    ?>
         <script>
-            jQuery(document).ready(function ($) {
-                $('.add-to-cart-button').on('click', function () {
+            jQuery(document).ready(function($) {
+                $('.add-to-cart-button').on('click', function() {
                     var product_id = $(this).data('product-id');
                     var quantity = $(this).closest('.product').find('.quantity').val();
 
@@ -217,7 +261,7 @@ function add_to_cart_script()
                 });
             });
         </script>
-        <?php
+    <?php
     }
 }
 add_action('wp_head', 'add_to_cart_script');
@@ -228,22 +272,23 @@ function cart_quantity_dropdown_js()
 {
     ?>
     <script type="text/javascript">
-        jQuery(function ($) {
-            $(document.body).on('change blur', 'form.woocommerce-cart-form .quantity select', function (e) {
-                var t = $(this), q = t.val(), p = t.parent();
+        jQuery(function($) {
+            $(document.body).on('change blur', 'form.woocommerce-cart-form .quantity select', function(e) {
+                var t = $(this),
+                    q = t.val(),
+                    p = t.parent();
                 $(this).parent().find('input').val($(this).val());
                 console.log($(this).parent().find('input').val());
             });
         });
     </script>
-    <?php
+<?php
 }
 
 // Adding Custom Meta Box Field to Shop Page
 function shop_banner_metabox()
 {
-    if (get_the_ID() == get_option('woocommerce_shop_page_id')) 
-    {
+    if (get_the_ID() == get_option('woocommerce_shop_page_id')) {
         add_meta_box("shop_banner_metabox_field", "Shop Banner Images", "shop_banner_metabox_field", "page", "side");
     }
 }
@@ -254,16 +299,16 @@ add_action('add_meta_boxes', 'shop_banner_metabox');
 //Creating the Custom Meta Box Field
 function shop_banner_metabox_field()
 {
-    ?>
+?>
     <label for="shop_page_field">Top Banner Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_top"/><br><br>
+    <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_top" /><br><br>
 
     <label for="shop_page_field">Left Banner Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_left"/><br><br>
+    <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_left" /><br><br>
 
     <label for="shop_page_field">Right Banner Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_right"/><br><br>
-    <?php
+    <input type='file' accept='image/png, image/jpeg' name="shop_banner_field_right" /><br><br>
+<?php
 }
 
 //Saving Images from Meta Field
@@ -354,8 +399,7 @@ add_action('save_post', 'save_banner_img');
 // Adding Custom Meta Box Field to Front Page
 function front_page_slider_metabox()
 {
-    if (get_the_ID() == get_option('page_on_front')) 
-    {
+    if (get_the_ID() == get_option('page_on_front')) {
         add_meta_box("front_page_slider_metabox_field", "Slider Images", "front_page_slider_metabox_field", "page", "side");
     }
 }
@@ -366,20 +410,20 @@ add_action('add_meta_boxes', 'front_page_slider_metabox');
 //Creating the Custom Meta Box Field
 function front_page_slider_metabox_field()
 {
-    ?>
+?>
     <label>1st Slider Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="front_page_slider1"/><br><br>
+    <input type='file' accept='image/png, image/jpeg' name="front_page_slider1" /><br><br>
 
     <label>2nd Slider Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="front_page_slider2"/><br><br>
+    <input type='file' accept='image/png, image/jpeg' name="front_page_slider2" /><br><br>
 
     <label>3rd Slider Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="front_page_slider3"/><br><br>
+    <input type='file' accept='image/png, image/jpeg' name="front_page_slider3" /><br><br>
 
     <label>4th Slider Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="front_page_slider4"/><br><br>
-    
-    <?php
+    <input type='file' accept='image/png, image/jpeg' name="front_page_slider4" /><br><br>
+
+<?php
 }
 
 //Saving Images from Meta Field
@@ -387,12 +431,13 @@ function save_front_page_slider()
 {
 
     //Slider 1
-    if (isset($_FILES['front_page_slider1'])) {
+    if (isset($_FILES['front_page_slider1']) && !empty($_FILES['front_page_slider1']['name'])) {
         $file = $_FILES['front_page_slider1'];
 
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            echo 'Error uploading file.';
+            var_dump($file);
+            echo 'Error uploading slider 1.';
             exit;
         }
 
@@ -412,14 +457,13 @@ function save_front_page_slider()
         echo 'File uploaded successfully!';
     }
 
-
     //Slider 2
-    if (isset($_FILES['front_page_slider2'])) {
+    if (isset($_FILES['front_page_slider2']) && !empty($_FILES['front_page_slider2']['name'])) {
         $file = $_FILES['front_page_slider2'];
 
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            echo 'Error uploading file.';
+            echo 'Error uploading slider 2.';
             exit;
         }
 
@@ -440,12 +484,12 @@ function save_front_page_slider()
     }
 
     //Slider 3
-    if (isset($_FILES['front_page_slider3'])) {
+    if (isset($_FILES['front_page_slider3']) && !empty($_FILES['front_page_slider3']['name'])) {
         $file = $_FILES['front_page_slider3'];
 
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            echo 'Error uploading file.';
+            echo 'Error uploading slider 3.';
             exit;
         }
 
@@ -466,12 +510,12 @@ function save_front_page_slider()
     }
 
     //Slider 4
-    if (isset($_FILES['front_page_slider4'])) {
+    if (isset($_FILES['front_page_slider4']) && !empty($_FILES['front_page_slider4']['name'])) {
         $file = $_FILES['front_page_slider4'];
 
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            echo 'Error uploading file.';
+            echo 'Error uploading slider 4.';
             exit;
         }
 
@@ -496,8 +540,7 @@ add_action('save_post', 'save_front_page_slider');
 //Adding custom metabox to Front Page
 function banner_metabox()
 {
-    if (get_the_ID() == get_option('page_on_front')) 
-    {
+    if (get_the_ID() == get_option('page_on_front')) {
         add_meta_box("banner_metabox_field", "Banner Images", "banner_metabox_field", "page", "side");
     }
 }
@@ -508,16 +551,16 @@ add_action('add_meta_boxes', 'banner_metabox');
 //Creating the Custom Meta Box Field
 function banner_metabox_field()
 {
-    ?>
+?>
     <label>Timer Banner Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="banner_field_top"/><br><br>
+    <input type='file' accept='image/png, image/jpeg' name="banner_field_top" /><br><br>
 
     <label>Left Banner Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="banner_field_left"/><br><br>
+    <input type='file' accept='image/png, image/jpeg' name="banner_field_left" /><br><br>
 
     <label>Right Banner Picture:</label><br>
-    <input type='file' accept='image/png, image/jpeg' name="banner_field_right"/><br><br>
-    <?php
+    <input type='file' accept='image/png, image/jpeg' name="banner_field_right" /><br><br>
+<?php
 }
 
 //Saving Images from Meta Field
@@ -525,12 +568,12 @@ function save_front_page_banner_img()
 {
 
     //Banner Image Top
-    if (isset($_FILES['banner_field_top'])) {
+    if (isset($_FILES['banner_field_top']) && !empty($_FILES['banner_field_top']['name'])) {
         $file = $_FILES['banner_field_top'];
 
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            echo 'Error uploading file.';
+            echo 'Error uploading banner_field_top.';
             exit;
         }
 
@@ -544,7 +587,7 @@ function save_front_page_banner_img()
         }
 
         // Update custom meta field with attachment ID
-        update_post_meta(get_the_ID(), 'fp_banner_img_top', $attachment_id);
+        update_post_meta(get_the_ID(), 'front_page_banner_img_top', $attachment_id);
 
         // Display success message
         echo 'File uploaded successfully!';
@@ -552,12 +595,12 @@ function save_front_page_banner_img()
 
 
     //Banner Image Left
-    if (isset($_FILES['banner_field_left'])) {
+    if (isset($_FILES['banner_field_left']) && !empty($_FILES['banner_field_left']['name'])) {
         $file = $_FILES['banner_field_left'];
 
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            echo 'Error uploading file.';
+            echo 'Error uploading banner_field_left.';
             exit;
         }
 
@@ -571,19 +614,19 @@ function save_front_page_banner_img()
         }
 
         // Update custom meta field with attachment ID
-        update_post_meta(get_the_ID(), 'fp_banner_img_left', $attachment_id);
+        update_post_meta(get_the_ID(), 'front_page_banner_img_left', $attachment_id);
 
         // Display success message
         echo 'File uploaded successfully!';
     }
 
     //Banner Image Right
-    if (isset($_FILES['banner_field_right'])) {
+    if (isset($_FILES['banner_field_right']) && !empty($_FILES['banner_field_right']['name'])) {
         $file = $_FILES['banner_field_right'];
 
         // Check for upload errors
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            echo 'Error uploading file.';
+            echo 'Error uploading banner_field_right.';
             exit;
         }
 
@@ -597,13 +640,62 @@ function save_front_page_banner_img()
         }
 
         // Update custom meta field with attachment ID
-        update_post_meta(get_the_ID(), 'fp_banner_img_right', $attachment_id);
+        update_post_meta(get_the_ID(), 'front_page_banner_img_right', $attachment_id);
 
         // Display success message
         echo 'File uploaded successfully!';
     }
 }
 add_action('save_post', 'save_front_page_banner_img');
+
+//Create Custom Meta Box for Testimonial Post Type
+function custom_metabox()
+    {   
+        add_meta_box("custom_metabox_field", "Custom Meta", "custom_metabox_field", "testimonial", "side");
+    }
+add_action('add_meta_boxes', 'custom_metabox');
+
+//Creating the Custom Meta Box Field
+function custom_metabox_field(){
+    $country = get_post_meta(get_the_ID(), 'country', true);
+    $name= get_post_meta(get_the_ID(),'name',true);
+    $position=get_post_meta(get_the_ID(),'position',true);
+    ?>
+    Name:<br>
+    <input type='text' name='name' value="<?php echo $name; ?>"><br><br>
+    Position:<br>
+    <input type='text' name='position' value="<?php echo $position; ?>"><br><br>
+    Country:<br>
+    <input type='text' name='country' value="<?php echo $country; ?>"><br><br>
+    <?php
+}
+
+//Saving Meta Data
+function save_custom_data(){
+    global $post;
+
+    //Save Name Data
+    if (isset($_POST["name"])) {
+
+        update_post_meta($post->ID, 'name', $_POST["name"]);
+
+    }
+
+    //Save Position Data
+    if (isset($_POST["position"])) {
+
+        update_post_meta($post->ID, 'position', $_POST["position"]);
+
+    }
+
+    //Save Country Data
+    if (isset($_POST["country"])) {
+
+        update_post_meta($post->ID, 'country', $_POST["country"]);
+
+    }
+}
+add_action('save_post', 'save_custom_data');
 
 
 //Creating a sales products widget
@@ -688,7 +780,6 @@ class woocommerce_conversion_sales_product_widget extends WP_Widget
         // Number of products to display
         echo '<p><label for="' . $this->get_field_id('number_of_products') . '">' . __('Number of products to display:') . '</label>';
         echo '<input class="widefat" id="' . $this->get_field_id('number_of_products') . '" name="' . $this->get_field_name('number_of_products') . '" type="number" min="1" step="1" value="' . esc_attr($number_of_products) . '"></p>';
-
     }
 
     // Sanitize widget form values as they are saved
@@ -699,11 +790,11 @@ class woocommerce_conversion_sales_product_widget extends WP_Widget
         $instance['number_of_products'] = isset($new_instance['number_of_products']) ? absint($new_instance['number_of_products']) : 5;
 
         return $instance;
-
     }
 }
 
 
+//Update Widget instance
 function update($new_instance, $old_instance)
 {
     $instance = array();
@@ -711,8 +802,53 @@ function update($new_instance, $old_instance)
     return $instance;
 }
 
+//Loading in Sales Product Widget
 function load_woocommerce_conversion_sales_product_widget()
 {
     register_widget('woocommerce_conversion_sales_product_widget');
 }
 add_action('widgets_init', 'load_woocommerce_conversion_sales_product_widget');
+
+//Adding custom rating function
+function review_display_rating()
+{
+    if (post_type_supports('product', 'comments')) {
+        wc_get_template('/review-rating.php');
+    }
+}
+
+//Removing default star rating function and replacing with custom one
+function remove_and_replace_hook()
+{
+    remove_action('woocommerce_review_before_comment_meta', 'woocommerce_review_display_rating', 10);
+    add_action('woocommerce_review_before_comment_meta', 'review_display_rating', 10);
+}
+add_action('woocommerce_review_before_comment_meta', 'remove_and_replace_hook', 1);
+
+//Creating Testimonial Post Type
+function create_post_type()
+{
+
+    $args = array(
+        'labels' => array(
+            'name' => __('Testimonial Post'),
+            'singular_name' => __('Testimonial')
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'supports' => array(
+            'editor',
+            'trackbacks',
+            'title',
+            'author',
+            'page-attributes',
+            'custom-fields',
+            'post-formats'
+        ),
+        'show_in_rest' => true,
+        'rewrite' => array('slug' => 'testimonial')
+    );
+
+    register_post_type('testimonial', $args);
+}
+add_action('init', 'create_post_type');

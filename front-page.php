@@ -278,7 +278,7 @@
 									$position = get_post_meta(get_the_id(), 'position',true);
 									$country = get_post_meta(get_the_id(), 'country',true);
 									?>
-									<div class="carousel-item <?php echo( ($x==1) ? 'active' : '');?> ">
+									<div class="height carousel-item <?php echo( ($x==1) ? 'active' : '');?> ">
 										<div class="testimonials_grid text-center">
 											<h3>
 												<?php echo $name; ?>

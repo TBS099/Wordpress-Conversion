@@ -7,6 +7,8 @@ function load_stylesheets()
 
     //CSS
     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . "/css/bootstrap.css", array(), '1.0', 'all');
+    wp_enqueue_style('cart-css', get_template_directory_uri() . "/css/cart.css", array(), '1.0', 'all');
+    wp_enqueue_style('checkout-css', get_template_directory_uri() . "/checkout.css", array(), '1.0', 'all');
     wp_enqueue_style('login-overlay-css', get_template_directory_uri() . '/css/login_overlay.css', array(), '1.0', 'all');
     wp_enqueue_style('stylesheet-1-css', get_template_directory_uri() . '/css/style6.css', array(), '1.0', 'all');
     wp_enqueue_style('shop-stylesheet', get_template_directory_uri() . '/css/shop.css', array(), '1.0', 'all');
@@ -852,3 +854,15 @@ function create_post_type()
     register_post_type('testimonial', $args);
 }
 add_action('init', 'create_post_type');
+
+//Removing alert messages in cart and checkout pages
+if(is_cart()||is_checkout()){
+    add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+    add_filter( 'woocommerce_add_success', '__return_false' );
+    add_filter( 'woocommerce_add_notice', '__return_false' );
+    add_filter( 'woocommerce_add_error', '__return_false' );
+};
+
+?>
+
+

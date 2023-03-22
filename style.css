@@ -1314,7 +1314,7 @@ input#datepicker {
 /*-- //Popup-Box --*/
 
 .banner_inner {
-    
+    background:url(images/banner-mid.jpg);
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -2674,3 +2674,8 @@ body {
 button.top_googles_cart {
     pointer-events: auto;
 }
+
+.height {
+    height:250px !important;
+}
+

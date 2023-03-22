@@ -4,24 +4,24 @@
 	<div class="container-fluid px-lg-5 px-3">
 		<div class="row footer-top-w3layouts">
 			<div class="col-lg-3 footer-grid-w3ls">
-			<?php if (is_active_sidebar('footer-sidebar1')):
-						dynamic_sidebar('footer-sidebar1');
-					endif; ?>
+				<?php if (is_active_sidebar('footer-sidebar1')):
+					dynamic_sidebar('footer-sidebar1');
+				endif; ?>
 			</div>
 			<div class="col-lg-3 footer-grid-w3ls">
-			<?php if (is_active_sidebar('footer-sidebar2')):
-						dynamic_sidebar('footer-sidebar2');
-					endif; ?>
+				<?php if (is_active_sidebar('footer-sidebar2')):
+					dynamic_sidebar('footer-sidebar2');
+				endif; ?>
 			</div>
 			<div class="col-lg-3 footer-grid-w3ls">
-			<?php if (is_active_sidebar('footer-sidebar3')):
-						dynamic_sidebar('footer-sidebar3');
-					endif; ?>
+				<?php if (is_active_sidebar('footer-sidebar3')):
+					dynamic_sidebar('footer-sidebar3');
+				endif; ?>
 			</div>
 			<div class="col-lg-3 footer-grid-w3ls">
-			<?php if (is_active_sidebar('footer-sidebar4')):
-						dynamic_sidebar('footer-sidebar4');
-					endif; ?>
+				<?php if (is_active_sidebar('footer-sidebar4')):
+					dynamic_sidebar('footer-sidebar4');
+				endif; ?>
 				<div class="footer-text">
 					<form action="#" method="post">
 						<input class="form-control" type="email" name="Email" placeholder="Enter your email..."
@@ -235,17 +235,16 @@
 		}
 	</script>
 
-<?php
+	<?php
 } elseif (is_archive() || is_front_page()) {
 	?>
 	<script>
 		function add_to_cart() {
-			<?php if(is_front_page()){ ?>
-			var product_id = <?php echo get_the_ID(); ?>; // Replace with the ID of your product
-			<?php } 
-			else{ ?>
-				var product_id=<?php echo get_option( 'woocommerce_shop_page_id' );?>;
-			<?php } ?> 
+			<?php if (is_front_page()) { ?>
+				var product_id = <?php echo get_the_ID(); ?>; // Replace with the ID of your product
+			<?php } else { ?>
+				var product_id = <?php echo get_option('woocommerce_shop_page_id'); ?>;
+			<?php } ?>
 			var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '"]';
 			var result = do_shortcode(shortcode);
 
@@ -253,7 +252,7 @@
 		}
 	</script>
 
-<?php
+	<?php
 } else {
 	"";
 }
@@ -273,6 +272,23 @@
 	}
 </script>
 <!-- End of Add to cart Function for featured products -->
+
+<?php
+if (is_checkout()==true){?>
+<script>
+	var labels = document.getElementsByTagName("label");
+  for (var i = 0; i < labels.length; i++) {
+    var label = labels[i];
+    if (label.classList.contains("screen-reader-text")) {
+      label.classList.remove("screen-reader-text");
+    }
+	label.classList.add('breaker');
+  }
+
+  var textarea = document.getElementById("order_comments");
+textarea.setAttribute("cols", "50");
+</script>
+<?php };?>
 
 <?php wp_footer(); ?>
 </body>

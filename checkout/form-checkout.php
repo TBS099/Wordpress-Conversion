@@ -37,7 +37,7 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 					<a href="index.html">Home</a>
 					<i>|</i>
 				</li>
-				<li>Checkout </li>
+				<li class="color">Checkout </li>
 			</ul>
 		</div>
 	</div>
@@ -45,14 +45,14 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 </div>
 <!--//banner -->
 <div class="body">
-	<div class="container">
+	<div class="container break">
 		<form name="checkout" method="post" class="checkout woocommerce-checkout"
 			action="<?php echo esc_url(wc_get_checkout_url()); ?>" enctype="multipart/form-data">
 			<div class="container">
 				<?php if ($checkout->get_checkout_fields()): ?>
 
 					<?php do_action('woocommerce_checkout_before_customer_details'); ?>
-
+					<h2 class="header">Checkout</h2>
 					<div class="col2-set" id="customer_details">
 						<div class="col-12">
 							<?php do_action('woocommerce_checkout_billing'); ?>
@@ -77,12 +77,12 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 
 				<?php do_action('woocommerce_checkout_order_review'); ?>
-				
-				
+
+
 				<?php do_action('woocommerce_checkout_after_order_review'); ?>
 			</div>
 
-			
+
 
 		</form>
 

@@ -41,8 +41,10 @@ function load_stylesheets()
     wp_enqueue_style('googlefont2', "https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800", array(), '1.0', 'all');
 }
 
-//Adding Customizer.php
-include('customizer.php');
+//Adding Customizer Repeater
+require get_template_directory() . '/customizer-repeater/functions.php';
+//Adding customizer.php
+require get_template_directory() . '/customizer.php';
 
 //Adding WooCommerce Support
 function mytheme_add_woocommerce_support()
@@ -548,8 +550,6 @@ function banner_metabox()
 }
 add_action('add_meta_boxes', 'banner_metabox');
 
-
-
 //Creating the Custom Meta Box Field
 function banner_metabox_field()
 {
@@ -650,6 +650,114 @@ function save_front_page_banner_img()
 }
 add_action('save_post', 'save_front_page_banner_img');
 
+//Adding custom metabox to About Us Page
+function about_banner_metabox()
+{
+    if ( get_the_ID()== 7 ) {
+        add_meta_box("about_banner_metabox_field", "Banner Images", "about_banner_metabox_field", "page", "side");
+    }
+}
+add_action('add_meta_boxes', 'about_banner_metabox');
+
+//Creating the Custom Meta Box Field
+function about_banner_metabox_field()
+{
+?>
+    <label>Top Banner Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="about_banner_field_top" /><br><br>
+
+    <label>Left Banner Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="about_banner_field_left" /><br><br>
+
+    <label>Right Banner Picture:</label><br>
+    <input type='file' accept='image/png, image/jpeg' name="about_banner_field_right" /><br><br>
+<?php
+}
+
+//Saving Images from Meta Field
+function save_about_banner_img()
+{
+
+    //Banner Image Top
+    if (isset($_FILES['about_banner_field_top']) && !empty($_FILES['about_banner_field_top']['name'])) {
+        $file = $_FILES['about_banner_field_top'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading about_banner_field_top.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('about_banner_field_top', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'about_banner_img_top', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+
+    //Banner Image Left
+    if (isset($_FILES['about_banner_field_left']) && !empty($_FILES['about_banner_field_left']['name'])) {
+        $file = $_FILES['about_banner_field_left'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading about_banner_field_left.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('about_banner_field_left', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'about_banner_img_left', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+
+    //Banner Image Right
+    if (isset($_FILES['about_banner_field_right']) && !empty($_FILES['about_banner_field_right']['name'])) {
+        $file = $_FILES['about_banner_field_right'];
+
+        // Check for upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo 'Error uploading about_banner_field_right.';
+            exit;
+        }
+
+        // Use WordPress media_handle_upload function to handle file upload and generate attachment metadata
+        $attachment_id = media_handle_upload('about_banner_field_right', 0);
+
+        // Check for errors in media_handle_upload
+        if (is_wp_error($attachment_id)) {
+            echo $attachment_id->get_error_message();
+            exit;
+        }
+
+        // Update custom meta field with attachment ID
+        update_post_meta(get_the_ID(), 'about_banner_img_right', $attachment_id);
+
+        // Display success message
+        echo 'File uploaded successfully!';
+    }
+}
+add_action('save_post', 'save_about_banner_img');
+
 //Create Custom Meta Box for Testimonial Post Type
 function custom_metabox()
     {   
@@ -698,7 +806,6 @@ function save_custom_data(){
     }
 }
 add_action('save_post', 'save_custom_data');
-
 
 //Creating a sales products widget
 class woocommerce_conversion_sales_product_widget extends WP_Widget
@@ -855,13 +962,6 @@ function create_post_type()
 }
 add_action('init', 'create_post_type');
 
-//Removing alert messages in cart and checkout pages
-if(is_cart()||is_checkout()){
-    add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
-    add_filter( 'woocommerce_add_success', '__return_false' );
-    add_filter( 'woocommerce_add_notice', '__return_false' );
-    add_filter( 'woocommerce_add_error', '__return_false' );
-};
 
 ?>
 

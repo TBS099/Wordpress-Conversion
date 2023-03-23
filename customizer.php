@@ -134,7 +134,7 @@ function link_customizer_setting(WP_Customize_Manager $wp_customize)
             'label' => __('Text 1', 'customizing'),
             'section' => 'link_buttons_settings',
             'settings' => 'text1',
-            'type'=>'textarea'
+            'type' => 'textarea'
         )
     );
 
@@ -226,7 +226,7 @@ function link_customizer_setting(WP_Customize_Manager $wp_customize)
             'label' => __('Text 2', 'customizing'),
             'section' => 'link_buttons_settings',
             'settings' => 'text2',
-            'type'=>'textarea'
+            'type' => 'textarea'
         )
     );
 
@@ -266,7 +266,7 @@ function link_customizer_setting(WP_Customize_Manager $wp_customize)
         )
     );
 
-        //Column 3
+    //Column 3
     //Icon 3
     $wp_customize->add_setting(
         'icon3',
@@ -318,7 +318,7 @@ function link_customizer_setting(WP_Customize_Manager $wp_customize)
             'label' => __('Text 3', 'customizing'),
             'section' => 'link_buttons_settings',
             'settings' => 'text3',
-            'type'=>'textarea'
+            'type' => 'textarea'
         )
     );
 
@@ -425,7 +425,7 @@ function bottom_testimonial_customizer_setting(WP_Customize_Manager $wp_customiz
             'label' => __('Text 1', 'customizing'),
             'section' => 'bottom_testimonial_settings',
             'settings' => 't-text1',
-            'type'=>'textarea'
+            'type' => 'textarea'
         )
     );
 
@@ -481,7 +481,7 @@ function bottom_testimonial_customizer_setting(WP_Customize_Manager $wp_customiz
             'label' => __('Text 2', 'customizing'),
             'section' => 'bottom_testimonial_settings',
             'settings' => 't-text2',
-            'type'=>'textarea'
+            'type' => 'textarea'
         )
     );
 
@@ -537,7 +537,7 @@ function bottom_testimonial_customizer_setting(WP_Customize_Manager $wp_customiz
             'label' => __('Text 3', 'customizing'),
             'section' => 'bottom_testimonial_settings',
             'settings' => 't-text3',
-            'type'=>'textarea'
+            'type' => 'textarea'
         )
     );
 
@@ -593,10 +593,10 @@ function bottom_testimonial_customizer_setting(WP_Customize_Manager $wp_customiz
             'label' => __('Text 4', 'customizing'),
             'section' => 'bottom_testimonial_settings',
             'settings' => 't-text4',
-            'type'=>'textarea'
+            'type' => 'textarea'
         )
     );
-} 
+}
 
 //Add Phone Number
 add_action('customize_register', 'phone_number_customizer_setting');
@@ -628,4 +628,33 @@ function phone_number_customizer_setting(WP_Customize_Manager $wp_customize)
             'settings' => 'phone_number'
         )
     );
+}
+
+//Adding About Us page Partner Profile Customizer
+add_action('customize_register', 'partner_profile_customizer_setting');
+function partner_profile_customizer_setting(WP_Customize_Manager $wp_customize)
+{
+    $wp_customize->add_section(
+        'profile_settings',
+        array(
+            'title' => __('Profile Settings', 'customizing'),
+            'priority' => 100
+        )
+    );
+
+    $wp_customize->add_setting('customizer_repeater_profile', array(
+        'sanitize_callback' => 'customizer_repeater_sanitize'
+    )
+    );
+    $wp_customize->add_control(new Customizer_Repeater($wp_customize, 'customizer_repeater_profile', array(
+        'label' => esc_html__('Profile', 'customizer-repeater'),
+        'section' => 'profile_settings',
+        'priority' => 1,
+        'customizer_repeater_image_control' => true,
+        'customizer_repeater_icon_control' => true,
+        'customizer_repeater_title_control' => true,
+
+        'customizer_repeater_text_control' => true,
+        'customizer_repeater_repeater_control' => true
+    )));
 }

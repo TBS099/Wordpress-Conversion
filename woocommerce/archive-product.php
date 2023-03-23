@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<?php $banner_img_top = wp_get_attachment_image_url(get_post_meta(get_option('woocommerce_shop_page_id'), 'banner_img_top', true)); ?>
+<?php $banner_img_top = wp_get_attachment_image_url(get_post_meta(get_option('woocommerce_shop_page_id'), 'banner_img_top', true),'full'); ?>
 <!-- banner -->
 <div class="banner_inner" style="background-image: url('<?php echo $banner_img_top; ?>');no-repeat 0px -73px;">
 	<div class="services-breadcrumb">
@@ -34,17 +34,18 @@
 				<div class="left-ads-display col-lg-9">
 					<div class="wrapper_top_shop">
 						<div class="row top-margin">
-							<div class="col-md-6 shop_left">
-								<?php $image_left = wp_get_attachment_image_url(get_post_meta(get_option('woocommerce_shop_page_id'), 'banner_img_left', true)); ?>
-								<img src="<?php echo $image_left; ?>" alt="">
-								<h6>40% off</h6>
+							<div class='row width'>
+								<div class="col-md-6 shop_left">
+									<?php $image_left = wp_get_attachment_image_url(get_post_meta(get_option('woocommerce_shop_page_id'), 'banner_img_left', true),'full'); ?>
+									<img src="<?php echo $image_left; ?>" alt="">
+									<h6>40% off</h6>
+								</div>
+								<div class="col-md-6 shop_right">
+									<?php $image_right = wp_get_attachment_image_url(get_post_meta(get_option('woocommerce_shop_page_id'), 'banner_img_right', true),'full'); ?>
+									<img src="<?php echo $image_right; ?>" alt="">
+									<h6>50% off</h6>
+								</div>
 							</div>
-							<div class="col-md-6 shop_right">
-								<?php $image_right = wp_get_attachment_image_url(get_post_meta(get_option('woocommerce_shop_page_id'), 'banner_img_right', true)); ?>
-								<img src="<?php echo $image_right; ?>" alt="">
-								<h6>50% off</h6>
-							</div>
-
 							<div class="row gaps">
 								<!-- /Products Display -->
 								<?php

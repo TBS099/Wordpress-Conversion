@@ -28,8 +28,10 @@
 
 .body {
     background-color: #ebe9eb;
-    margin-top:20px;
+    
 }
+
+
 
 .breaker {
     display:block;
@@ -55,4 +57,28 @@
     .woocommerce-privacy-policy-text {
         width:100px;
     }
+}
+
+.header {
+    font-size:2em !important;
+    font-weight: bolder;
+    margin:20px 0 0 0 !important;
+}
+
+.woocommerce-billing-fields h3 {
+    margin-top:20px;
+}
+
+#order_review_heading {
+    margin-top:78px !important;
+}
+
+@media(max-width:1200px) {
+    .form-row.form-row-last.validate-required {
+        float:none !important;
+    }
+}
+
+.color {
+    color:#fff !important;
 }

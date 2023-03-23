@@ -1,3 +1,4 @@
+<a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
 <!--footer -->
 <footer class="py-lg-5 py-3">
 
@@ -259,8 +260,41 @@
 ;
 ?>
 <!-- End of Add to cart Function for pages -->
+<!-- Move to Top -->
+<script>
+	jQuery(document).ready(function($) {
+            $(".scroll").click(function(event) {
+                event.preventDefault();
+                $('html,body').animate({
+                    scrollTop: $(this.hash).offset().top
+                }, 900);
+            });
+        });
+    
+</script>
+<!-- End of Move to Top -->
+<!-- Smooth Scrolling -->
+<script>
+	
+	jQuery(document).ready(function() {
+            /*
+            						var defaults = {
+            							  containerID: 'toTop', // fading element id
+            							containerHoverID: 'toTopHover', // fading element hover id
+            							scrollSpeed: 1200,
+            							easingType: 'linear' 
+            						 };
+            						*/
 
-<!-- Add to cart Function for featured products -->
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    
+</script>
+<!-- End of Smooth Scrolling -->
+<!-- Add to Cart Function for featured products -->
 <script>
 	function add_to_cart_featured() {
 		var product_id = <?php echo $id; ?>; // Replace with the ID of your product

@@ -9,7 +9,7 @@
 					<a href="<?php echo get_home_url();?>">Home</a>
 					<i>|</i>
 				</li>
-				<li><?php echo get_the_title();?></li>
+				<li class='color'><?php echo get_the_title();?></li>
 			</ul>
 		</div>
 	</div>

@@ -325,7 +325,7 @@
 		<div class="row galsses-grids pt-lg-5 pt-3">
 			<div class="col-lg-6 galsses-grid-left">
 				<figure class="effect-lexi">
-					<?php $img_left = wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'front_page_banner_img_left', true)); ?>
+					<?php $img_left = wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'front_page_banner_img_left', true),'full'); ?>
 					<img src="<?php echo $img_left ?>" alt="" class="img-fluid">
 					<figcaption>
 						<h3>Editor's
@@ -337,7 +337,7 @@
 			</div>
 			<div class="col-lg-6 galsses-grid-left">
 				<figure class="effect-lexi">
-					<?php $img_right = wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'front_page_banner_img_right', true)); ?>
+					<?php $img_right = wp_get_attachment_image_url(get_post_meta(get_option('page_on_front'), 'front_page_banner_img_right', true),'full'); ?>
 					<img src="<?php echo $img_right; ?>" alt="" class="img-fluid">
 					<figcaption>
 						<h3>Editor's
@@ -354,7 +354,7 @@
 				<div class="col-lg-4 bottom-sub-grid text-center">
 					<div class="bt-icon">
 
-						<span class="<?php echo get_theme_mod('icon1');?>"></span>
+						<span class="<?php echo get_theme_mod('icon1',);?>"></span>
 					</div>
 
 					<h4 class="sub-tittle-w3layouts my-lg-4 my-3"><?php echo get_theme_mod('sub-title1');?></h4>

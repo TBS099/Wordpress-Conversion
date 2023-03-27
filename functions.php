@@ -23,11 +23,9 @@ function load_stylesheets()
 
     //Javascript
     wp_enqueue_script('owl-carousel', get_template_directory_uri() . '/js/owl.carousel.js', array('jquery'), null, true);
-    wp_enqueue_script('jquery.min', get_template_directory_uri() . '/js/jquery-2.2.3.min.js', array('jquery'), null, true);
     wp_enqueue_script('flexslider-js', get_template_directory_uri() . '/js/jquery.flexslider.js', array('jquery'), null, true);
     wp_enqueue_script('classie-search', get_template_directory_uri() . '/js/classie-search.js', array(), null, true);
     wp_enqueue_script('demo1-search', get_template_directory_uri() . '/js/demo1-search.js', array(), null, true);
-    wp_enqueue_script('minicart', get_template_directory_uri() . '/js/minicart.js', array(), null, false);
     wp_enqueue_script('simply-countdown-js', get_template_directory_uri() . '/js/simplyCountdown.js', array(), null, false);
     wp_enqueue_script('move-top', get_template_directory_uri() . '/js/move-top.js', array(), null, true);
     wp_enqueue_script('easing', get_template_directory_uri() . '/js/easing.js', array(), null, true);
@@ -40,6 +38,22 @@ function load_stylesheets()
     wp_enqueue_style('googlefont1', "https://fonts.googleapis.com/css?family=Inconsolata:400,700", array(), '1.0', 'all');
     wp_enqueue_style('googlefont2', "https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800", array(), '1.0', 'all');
 }
+
+if (is_checkout()) 
+{
+exit;
+}
+else
+{
+wp_enqueue_script('jquery.min', get_template_directory_uri() . '/js/jquery-2.2.3.min.js', array('jquery'), null, true);
+}
+
+//Load BlockUI in header
+function load_blockui_script() {
+    wp_register_script( 'blockui', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js', array( 'jquery' ), '2.70', false );
+    wp_enqueue_script( 'blockui' );
+}
+add_action( 'wp_enqueue_scripts', 'load_blockui_script' );
 
 //Adding Customizer Repeater
 require get_template_directory() . '/customizer-repeater/functions.php';

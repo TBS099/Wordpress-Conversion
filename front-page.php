@@ -182,7 +182,7 @@
 					$results = $wpdb->get_results("
 					SELECT * 
 					FROM {$wpdb->prefix}term_relationships
-					WHERE term_taxonomy_id = 8
+					WHERE term_taxonomy_id = 11
 					");
 					//Singling id from array
 					$ids = array();
@@ -237,12 +237,31 @@
 															' . do_shortcode("[product_rating id=" . $id . "]") . '
 															</ul>
 														</div>
-														<div class="googles single-item hvr-outline-out">
-																<button type="submit" onclick="addToCart("' . $id . '")" class="googles-cart pgoogles-cart">
+														<div class="googles single-item hvr-outline-out">';
+														$product=wc_get_product($id);
+														if ($product->is_in_stock()): ?>
+
+															<?php do_action('woocommerce_before_add_to_cart_form'); ?>
+			
+															<form class="cart" action="#" method="post" enctype='multipart/form-data'>
+																<?php do_action('woocommerce_before_add_to_cart_button'); ?>
+			
+																<?php
+																do_action('woocommerce_before_add_to_cart_quantity'); ?>
+			
+																<button type="submit" name="add-to-cart"
+																	value="<?php echo esc_attr($product->get_id()); ?>"
+																	class="googles-cart pgoogles-cart single_add_to_cart_button button alt<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?>">
 																	<i class="fas fa-cart-plus"></i>
 																</button>
-
-														</div>
+			
+																<?php do_action('woocommerce_after_add_to_cart_button'); ?>
+															</form>
+			
+															<?php do_action('woocommerce_after_add_to_cart_form'); ?>
+			
+														<?php endif;
+														echo '</div>
 													</div>
 
 												</div>

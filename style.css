@@ -2680,3 +2680,125 @@ button.top_googles_cart {
     height:250px !important;
 }
 
+.myaccount-navigation {
+    float: left;
+}
+
+.myaccount {
+min-height:300px;
+display:flex;
+margin-left:100px;
+}
+
+.woocommerce-MyAccount-navigation ul li a{
+    color: #000;
+    display: block;
+    padding: 0.25em 20px;
+    text-decoration: none;
+}
+
+.woocommerce-MyAccount-navigation ul li.is-active a {
+    color:#ff4e00 !important;
+}
+
+.woocommerce-MyAccount-navigation ul li {
+    text-align: center;
+    width:160px;
+}
+
+.woocommerce-MyAccount-navigation ul {
+    margin-top:50px;
+}
+
+.woocommerce-MyAccount-content {
+    padding-left:150px;
+    padding-right:150px;
+}
+
+.woocommerce-EditAccountForm.edit-account {
+    float: right;
+}
+
+.save-button-style {
+    display: flex;
+    justify-content: center;
+    margin-top:40px;
+}
+
+.button-color {
+    background-color: #ff4e00 !important;
+    color:#fff !important;
+}
+
+.button-color:hover {
+    background-color: #dc4300  !important;
+    color:#fff !important;
+}
+
+.myaccount-sub-title {
+    margin-bottom:50px;
+    padding-bottom:20px;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.wide {
+    width:900px;
+}
+
+.lowering-margin {
+    margin-right:25px;
+}
+
+.center {
+    text-align:center;
+}
+
+.woocommerce-message.woocommerce-message--info.woocommerce-Message.woocommerce-Message--info.woocommerce-info {
+    width:700px;
+}
+
+.wide {
+    width:900px;
+}
+
+.container.myaccount {
+    margin-bottom:50px;
+    margin-top:100px;
+}
+
+.col.wide {
+    border-right:1px solid;
+}
+
+.underfont {
+    font-size:smaller;
+}
+
+.billing-shipping-title{
+    width:200px;
+    border-bottom: 1px solid;
+}
+
+.woocommerce-Address {
+    text-align:center;
+}
+
+address {
+    margin-top: 20px;
+    width:200px;
+}
+
+.right-side {
+    margin-left:150px;
+}
+
+.woocommerce .col2-set .col-2, .woocommerce-page .col2-set .col-2 {
+    float: none !important;
+    margin-left:500px;
+}
+
+.move-form {
+    margin-left:150px;
+    margin-right:150px;
+}

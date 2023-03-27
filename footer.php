@@ -84,21 +84,6 @@
 </script>
 <!-- // modal -->
 
-<!-- cart-js -->
-<script>
-	googles.render();
-
-	googles.cart.on('googles_checkout', function (evt) {
-		var items, len, i;
-
-		if (this.subtotal() > 0) {
-			items = this.items();
-
-			for (i = 0, len = items.length; i < len; i++) { }
-		}
-	});
-</script>
-<!-- //cart-js -->
 <script>
 	jQuery(document).ready(function () {
 		jQuery(".button-log a").click(function () {
@@ -126,8 +111,8 @@
 
 <!-- carousel -->
 <script>
-	jQuery(document).ready(function ($) {
-		$('.owl-carousel').owlCarousel({
+	jQuery(document).ready(function (jQuery) {
+		jQuery('.owl-carousel').owlCarousel({
 			loop: true,
 			margin: 10,
 			responsiveClass: true,
@@ -165,14 +150,14 @@
 			fit: true, // 100% fit in a container
 			closed: 'accordion', // Start closed if in accordion view
 			activate: function (event) { // Callback function if tab is switched
-				var $tab = $(this);
-				var $info = $('#tabInfo');
-				var $name = $('span', $info);
-				$name.text($tab.text());
-				$info.show();
+				var jQuerytab = jQuery(this);
+				var jQueryinfo = jQuery('#tabInfo');
+				var jQueryname = jQuery('span', jQueryinfo);
+				jQueryname.text(jQuerytab.text());
+				jQueryinfo.show();
 			}
 		});
-		$('#verticalTab').easyResponsiveTabs({
+		jQuery('#verticalTab').easyResponsiveTabs({
 			type: 'vertical',
 			width: 'auto',
 			fit: true
@@ -183,7 +168,7 @@
 
 <!-- FlexSlider -->
 <script>
-	// Can also be used with $(document).ready()
+	// Can also be used with jQuery(document).ready()
 	jQuery(window).load(function () {
 		jQuery('.flexslider1').flexslider({
 			animation: "slide",
@@ -210,69 +195,20 @@
 </script>
 <!-- //dropdown nav -->
 
-<script>
-	jQuery(document).ready(function (jQuery) {
-		jQuery(".scroll").click(function (event) {
-			event.preventDefault();
-			jQuery('html,body').animate({
-				scrollTop: jQuery(this.hash).offset().top
-			}, 900);
-		});
-	});
-</script>
-
-
-<!-- Add to cart function for pages -->
-<?php if (is_singular()) { ?>
-	<script>
-		function add_to_cart() {
-			var product_id = <?php echo get_the_ID(); ?>; // Replace with the ID of your product
-			var quantity = jQuery('quantity').val(); // Replace with the ID of your quantity dropdown
-
-			var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '" dropdown_id="' + quantity + '"]';
-			var result = do_shortcode(shortcode);
-
-			console.log(result);
-		}
-	</script>
-
-	<?php
-} elseif (is_archive() || is_front_page()) {
-	?>
-	<script>
-		function add_to_cart() {
-			<?php if (is_front_page()) { ?>
-				var product_id = <?php echo get_the_ID(); ?>; // Replace with the ID of your product
-			<?php } else { ?>
-				var product_id = <?php echo get_option('woocommerce_shop_page_id'); ?>;
-			<?php } ?>
-			var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '"]';
-			var result = do_shortcode(shortcode);
-
-			console.log(result);
-		}
-	</script>
-
-	<?php
-} else {
-	"";
-}
-;
-?>
-<!-- End of Add to cart Function for pages -->
 <!-- Move to Top -->
 <script>
-	jQuery(document).ready(function($) {
-            $(".scroll").click(function(event) {
+	jQuery(document).ready(function(jQuery) {
+            jQuery(".scroll").click(function(event) {
                 event.preventDefault();
-                $('html,body').animate({
-                    scrollTop: $(this.hash).offset().top
+                jQuery('html,body').animate({
+                    scrollTop: jQuery(this.hash).offset().top
                 }, 900);
             });
         });
     
 </script>
 <!-- End of Move to Top -->
+
 <!-- Smooth Scrolling -->
 <script>
 	
@@ -286,7 +222,7 @@
             						 };
             						*/
 
-            $().UItoTop({
+            jQuery().UItoTop({
                 easingType: 'easeOutQuart'
             });
 
@@ -294,19 +230,8 @@
     
 </script>
 <!-- End of Smooth Scrolling -->
-<!-- Add to Cart Function for featured products -->
-<script>
-	function add_to_cart_featured() {
-		var product_id = <?php echo $id; ?>; // Replace with the ID of your product
 
-		var shortcode = '[my_custom_add_to_cart product_id="' + product_id + '"]';
-		var result = do_shortcode(shortcode);
-
-		console.log(result);
-	}
-</script>
-<!-- End of Add to cart Function for featured products -->
-
+<!-- Removing screen-reader-text in checkout page -->
 <?php
 if (is_checkout()==true){?>
 <script>

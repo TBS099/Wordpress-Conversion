@@ -18,10 +18,10 @@
 
 			<ul class="short">
 				<li>
-					<a href="index.html">Home</a>
-					<i>|</i>
+					<a href="<?php echo home_url();?>">Home</a>
+					<i class="color">|</i>
 				</li>
-				<li>About Us</li>
+				<li class="color">About Us</li>
 			</ul>
 		</div>
 	</div>

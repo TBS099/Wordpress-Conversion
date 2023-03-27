@@ -89,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="col-md-3 top-info-cart text-right mt-lg-4">
 					<ul class="cart-inner-info">
 						<li class="button-log">
-							<a class="btn-open" href="">
+							<a class="btn-open" href="<?php echo get_permalink( get_option( 'woocommerce_myaccount_page_id' ) );?>">
 								<span class="fa fa-user" aria-hidden="true"></span>
 							</a>
 						</li>

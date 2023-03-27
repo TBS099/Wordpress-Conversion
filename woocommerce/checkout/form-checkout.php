@@ -34,8 +34,8 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 
 			<ul class="short">
 				<li>
-					<a href="index.html">Home</a>
-					<i>|</i>
+					<a href="<?php echo home_url();?>">Home</a>
+					<i class="color">|</i>
 				</li>
 				<li class="color">Checkout </li>
 			</ul>
@@ -90,3 +90,4 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 		<?php do_action('woocommerce_after_checkout_form', $checkout); ?>
 	</div>
 </div>
+

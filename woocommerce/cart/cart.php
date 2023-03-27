@@ -25,19 +25,18 @@ defined('ABSPATH') || exit;
 			<ul class="short">
 				<li>
 					<a href="index.html">Home</a>
-					<i>|</i>
+					<i class="color">|</i>
 				</li>
-				<li>Checkout </li>
+				<li class="color">Cart </li>
 			</ul>
 		</div>
 	</div>
-
 </div>
 <!--//banner -->
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
 	<div class="container">
 		<div class="inner-sec-shop px-lg-4 px-3">
-			<h3 class="tittle-w3layouts my-lg-4 mt-3">Checkout </h3>
+			<h3 class="tittle-w3layouts my-lg-4 mt-3">Cart</h3>
 			<?
 			do_action('woocommerce_before_cart'); ?>
 
@@ -73,7 +72,7 @@ defined('ABSPATH') || exit;
 					</thead>
 					<tbody>
 						<?php
-						$x=1;
+						$x = 1;
 						foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
 							$_product = apply_filters('woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key);
 							$product_id = apply_filters('woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key);
@@ -86,9 +85,9 @@ defined('ABSPATH') || exit;
 
 									<td>
 										<?php
-											echo $x;
-											$x++;
-										?>	
+										echo $x;
+										$x++;
+										?>
 									</td>
 
 									<td class="product-thumbnail">
@@ -160,7 +159,7 @@ defined('ABSPATH') || exit;
 										echo apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($_product, $cart_item['quantity']), $cart_item, $cart_item_key); // PHPCS: XSS ok.
 										?>
 									</td>
-									
+
 									<td class="product-remove">
 										<?php
 										echo apply_filters(

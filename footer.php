@@ -47,6 +47,7 @@
 <!-- newsletter modal -->
 <!-- Modal -->
 <!-- Modal -->
+<?php if(is_home()){?>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -77,6 +78,7 @@
 		</div>
 	</div>
 </div>
+<?php };?>
 <script>
 	jQuery(document).ready(function () {
 		jQuery("#myModal").modal();
@@ -111,7 +113,7 @@
 
 <!-- carousel -->
 <script>
-	jQuery(document).ready(function (jQuery) {
+	jQuery(document).ready(function ($) {
 		jQuery('.owl-carousel').owlCarousel({
 			loop: true,
 			margin: 10,

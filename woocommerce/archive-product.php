@@ -25,9 +25,11 @@
 			<div class="row">
 				<!-- product left -->
 				<div class="side-bar col-lg-3">
-					<?php if (is_active_sidebar('shop-sidebar')):
+					<?php 
+					if (is_active_sidebar('shop-sidebar')):
 						dynamic_sidebar('shop-sidebar');
-					endif; ?>
+					endif;
+					 ?>
 				</div>
 				<!-- //product left -->
 				<!--/product right-->

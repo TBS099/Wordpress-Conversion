@@ -1,5 +1,14 @@
 <?php
 
+if (is_checkout()) 
+{
+exit;
+}
+else
+{
+wp_enqueue_script('jquery.min', get_template_directory_uri() . '/js/jquery-2.2.3.min.js', array('jquery'), null, true);
+}
+
 //adding fonts, javascript and stylsheets
 add_action('wp_enqueue_scripts', 'load_stylesheets');
 function load_stylesheets()
@@ -20,6 +29,7 @@ function load_stylesheets()
     wp_enqueue_style('simply-countdown-css', get_template_directory_uri() . '/css/simplyCountdown.css', array(), '1.0', 'all');
     wp_enqueue_style('flexslider-css', get_template_directory_uri() . '/css/flexslider.css', array(), '1.0', 'all');
     wp_enqueue_style('easy-responsive-tabs-css', get_template_directory_uri() . '/css/easy-responsive-tabs.css', array(), '1.0', 'all');
+    wp_enqueue_style('contact-stylesheet', get_template_directory_uri() . '/css/contact.css', array(), '1.0', 'all');
 
     //Javascript
     wp_enqueue_script('owl-carousel', get_template_directory_uri() . '/js/owl.carousel.js', array('jquery'), null, true);
@@ -37,15 +47,6 @@ function load_stylesheets()
     //Google Fonts
     wp_enqueue_style('googlefont1', "https://fonts.googleapis.com/css?family=Inconsolata:400,700", array(), '1.0', 'all');
     wp_enqueue_style('googlefont2', "https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800", array(), '1.0', 'all');
-}
-
-if (is_checkout()) 
-{
-exit;
-}
-else
-{
-wp_enqueue_script('jquery.min', get_template_directory_uri() . '/js/jquery-2.2.3.min.js', array('jquery'), null, true);
 }
 
 //Load BlockUI in header
@@ -821,6 +822,187 @@ function save_custom_data(){
 }
 add_action('save_post', 'save_custom_data');
 
+//Create a Custom Contact 1 Metabox for Contact Page
+function custom_contact1_metabox()
+    {   
+        if ( get_the_ID()== 8 ) {
+        add_meta_box("custom_contact1_metabox_field", "Custom Contact 1 Meta", "custom_contact1_metabox_field", "page", "side");
+        }
+    }
+add_action('add_meta_boxes', 'custom_contact1_metabox');
+
+//Creating the Custom Meta Box Field
+function custom_contact1_metabox_field(){
+    $icon1 = get_post_meta(get_the_ID(), 'icon1', true);
+    $title1= get_post_meta(get_the_ID(),'contact-title1',true);
+    $contact1=get_post_meta(get_the_ID(),'contact1',true);
+    ?>
+    Icon Class(FontAwesome):<br>
+    <input type='text' name='icon-class1' value="<?php echo $icon1; ?>"><br><br>
+    Title:<br>
+    <input type='text' name='title1' value="<?php echo $title1; ?>"><br><br>
+    Contact:<br>
+    <input type='text' name='contact1' value="<?php echo $contact1; ?>"><br><br>
+    <?php
+}
+
+//Saving Meta Data
+function save_custom_contact1_data(){
+    global $post;
+
+    //Save Icon Class Data
+    if (isset($_POST["icon-class1"])) {
+
+        update_post_meta($post->ID, 'icon1', $_POST["icon-class1"]);
+
+    }
+
+    //Save title Data
+    if (isset($_POST["title1"])) {
+
+        update_post_meta($post->ID, 'contact-title1', $_POST["title1"]);
+
+    }
+
+    //Save contact Data
+    if (isset($_POST["contact1"])) {
+
+        update_post_meta($post->ID, 'contact1', $_POST["contact1"]);
+
+    }
+}
+add_action('save_post', 'save_custom_contact1_data');
+
+//Create a Custom Contact 2 Metabox for Contact Page
+function custom_contact2_metabox()
+    {   
+        if ( get_the_ID()== 8 ) {
+        add_meta_box("custom_contact2_metabox_field", "Custom Contact 2 Meta(Use for Mail)", "custom_contact2_metabox_field", "page", "side");
+        }
+    }
+add_action('add_meta_boxes', 'custom_contact2_metabox');
+
+//Creating the Custom Meta Box Field
+function custom_contact2_metabox_field(){
+    $icon2 = get_post_meta(get_the_ID(), 'icon2', true);
+    $title2= get_post_meta(get_the_ID(),'contact-title2',true);
+    $contact2=get_post_meta(get_the_ID(),'contact2',true);
+    ?>
+    Icon Class(FontAwesome):<br>
+    <input type='text' name='icon-class2' value="<?php echo $icon2; ?>"><br><br>
+    Title:<br>
+    <input type='text' name='title2' value="<?php echo $title2; ?>"><br><br>
+    Contact:<br>
+    <input type='text' name='contact2' value="<?php echo $contact2; ?>"><br><br>
+    <?php
+}
+
+//Saving Meta Data
+function save_custom_contact2_data(){
+    global $post;
+
+    //Save Icon Class Data
+    if (isset($_POST["icon-class2"])) {
+
+        update_post_meta($post->ID, 'icon2', $_POST["icon-class2"]);
+
+    }
+
+    //Save title Data
+    if (isset($_POST["title2"])) {
+
+        update_post_meta($post->ID, 'contact-title2', $_POST["title2"]);
+
+    }
+
+    //Save contact Data
+    if (isset($_POST["contact2"])) {
+
+        update_post_meta($post->ID, 'contact2', $_POST["contact2"]);
+
+    }
+}
+add_action('save_post', 'save_custom_contact2_data');
+
+//Create a Custom Contact 3 Metabox for Contact Page
+function custom_contact3_metabox()
+    {   
+        if ( get_the_ID()== 8 ) {
+        add_meta_box("custom_contact3_metabox_field", "Custom Contact 3 Meta", "custom_contact3_metabox_field", "page", "side");
+        }
+    }
+add_action('add_meta_boxes', 'custom_contact3_metabox');
+
+//Creating the Custom Meta Box Field
+function custom_contact3_metabox_field(){
+    $icon3 = get_post_meta(get_the_ID(), 'icon3', true);
+    $title3= get_post_meta(get_the_ID(),'contact-title3',true);
+    $contact3=get_post_meta(get_the_ID(),'contact3',true);
+    ?>
+    Icon Class(FontAwesome):<br>
+    <input type='text' name='icon-class3' value="<?php echo $icon3; ?>"><br><br>
+    Title:<br>
+    <input type='text' name='title3' value="<?php echo $title3; ?>"><br><br>
+    Contact:<br>
+    <input type='text' name='contact3' value="<?php echo $contact3; ?>"><br><br>
+    <?php
+}
+
+//Saving Meta Data
+function save_custom_contact3_data(){
+    global $post;
+
+    //Save Icon Class Data
+    if (isset($_POST["icon-class3"])) {
+
+        update_post_meta($post->ID, 'icon3', $_POST["icon-class3"]);
+
+    }
+
+    //Save title Data
+    if (isset($_POST["title3"])) {
+
+        update_post_meta($post->ID, 'contact-title3', $_POST["title3"]);
+
+    }
+
+    //Save contact Data
+    if (isset($_POST["contact3"])) {
+
+        update_post_meta($post->ID, 'contact3', $_POST["contact3"]);
+
+    }
+}
+add_action('save_post', 'save_custom_contact3_data');
+
+function custom_Map_metabox()
+    {   
+        if ( get_the_ID()== 8 ) {
+        add_meta_box("custom_map_metabox_field", "Custom Map Meta", "custom_map_metabox_field", "page", "side");
+        }
+    }
+add_action('add_meta_boxes', 'custom_map_metabox');
+
+//Creating the Custom Meta Box Field
+function custom_map_metabox_field(){
+    $map=get_post_meta(get_the_ID(),'map',true);
+    ?>
+    Map URL:<br>
+    <input type='text' name='map' value="<?php echo $map; ?>"><br><br>
+    <?php
+}
+
+//Saving Meta Data
+function save_custom_map_data(){
+    global $post;
+
+    //Save Icon Class Data
+    if (isset($_POST["map"])) {
+        update_post_meta($post->ID, 'map', $_POST["map"]);
+    }
+}
+add_action('save_post', 'save_custom_map_data');
+
 //Creating a sales products widget
 class woocommerce_conversion_sales_product_widget extends WP_Widget
 {
@@ -975,8 +1157,4 @@ function create_post_type()
     register_post_type('testimonial', $args);
 }
 add_action('init', 'create_post_type');
-
-
-?>
-
 

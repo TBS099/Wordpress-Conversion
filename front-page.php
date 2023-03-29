@@ -177,7 +177,6 @@
 			<div class="mid-slider">
 				<div class="owl-carousel owl-theme row">
 					<?php
-
 					//Get Featured Items ID
 					$results = $wpdb->get_results("
 					SELECT * 

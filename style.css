@@ -2878,3 +2878,34 @@ address {
     margin-left:300px;
     margin-top:50px;
 }
+
+.wp-block-search__input {
+    width: 100%;
+    padding: 1em 1.5em;
+    font-size: 17px;
+    color: #fff;
+    outline: none;
+    background: none;
+    -webkit-appearance: none;
+    border: 2px solid #fff;
+    letter-spacing: 4px;
+    border-radius: 0;
+}
+
+.wp-block-search__button.has-icon.wp-element-button {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    outline: none;
+    letter-spacing: 2px;
+    padding: 0.9em 3em;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -webkit-appearance: none;
+    background: #ff4e00;
+    border-radius: 0;
+}

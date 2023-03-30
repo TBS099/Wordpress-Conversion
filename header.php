@@ -122,12 +122,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<button type="button" class="overlay-close">
 						<i class="fa fa-times" aria-hidden="true"></i>
 					</button>
-					<form action="#" method="post" class="d-flex">
-						<input class="form-control" type="search" placeholder="Search here..." required="">
-						<button type="submit" class="btn btn-primary submit">
-							<i class="fas fa-search"></i>
-						</button>
-					</form>
+					<?php 
+					if (is_active_sidebar('search-sidebar')):
+						dynamic_sidebar('search-sidebar');
+					endif;
+					 ?>
 
 				</div>
 				<!-- open/close -->

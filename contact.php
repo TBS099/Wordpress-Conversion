@@ -55,7 +55,7 @@
                 <div class="col-lg-4 address-grid border-right">
                     <div class="row address-info">
                         <div class="col-md-3 address-left text-center">
-                            <i class="<?php echo get_post_meta(get_the_ID(),'icon2');?>"></i>
+                            <i class="<?php echo get_post_meta(get_the_ID(),'icon2',true);?>"></i>
                         </div>
                         <div class="col-md-9 address-right text-left">
                             <h6><?php echo get_post_meta(get_the_ID(),'contact-title2',true);?></h6>
@@ -70,7 +70,7 @@
                 <div class="col-lg-4 address-grid">
                     <div class="row address-info">
                         <div class="col-md-3 address-left text-center">
-                            <i class="<?php echo get_post_meta(get_the_ID(),'icon3');?>"></i>
+                            <i class="<?php echo get_post_meta(get_the_ID(),'icon3',true);?>"></i>
                         </div>
                         <div class="col-md-9 address-right text-left">
                             <h6><?php echo get_post_meta(get_the_ID(),'contact-title3',true);?></h6>

@@ -35,13 +35,14 @@ function load_stylesheets()
     wp_enqueue_script('owl-carousel', get_template_directory_uri() . '/js/owl.carousel.js', array('jquery'), null, true);
     wp_enqueue_script('flexslider-js', get_template_directory_uri() . '/js/jquery.flexslider.js', array('jquery'), null, true);
     wp_enqueue_script('classie-search', get_template_directory_uri() . '/js/classie-search.js', array(), null, true);
+    wp_enqueue_script('modernizr', get_template_directory_uri() . '/js/modernizr-2.6.2.min.js', array(), null, true);
     wp_enqueue_script('demo1-search', get_template_directory_uri() . '/js/demo1-search.js', array(), null, true);
     wp_enqueue_script('simply-countdown-js', get_template_directory_uri() . '/js/simplyCountdown.js', array(), null, false);
     wp_enqueue_script('move-top', get_template_directory_uri() . '/js/move-top.js', array(), null, true);
     wp_enqueue_script('easing', get_template_directory_uri() . '/js/easing.js', array(), null, true);
     wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/bootstrap.js', array(), null, true);
     wp_enqueue_script('imagezoom', get_template_directory_uri() . '/js/imagezoom.js', array(), null, true);
-    wp_enqueue_script('modernizr', get_template_directory_uri() . '/js/modernizr-2.6.2.min.js', array(), null, true);
+    
     wp_enqueue_script('easy-responsive-tabs-js', get_template_directory_uri() . '/js/easy-responsive-tabs.js', array(), null, true);
 
     //Google Fonts
@@ -88,6 +89,17 @@ function shop_sidebar()
         array(
             'name' => 'Shop Sidebar',
             'id' => 'shop-sidebar',
+            'before_title' => '<h4 class="widget-title">',
+            'after_title' => '</h4>',
+        )
+
+    );
+
+    register_sidebar(
+
+        array(
+            'name' => 'Search Sidebar',
+            'id' => 'search-sidebar',
             'before_title' => '<h4 class="widget-title">',
             'after_title' => '</h4>',
         )
